@@ -8,7 +8,7 @@ import javax.persistence.*
 class Employee(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id:Long = 0,
+    var id:Long? = null,
     @Column
     var name:String? = null
 ) {

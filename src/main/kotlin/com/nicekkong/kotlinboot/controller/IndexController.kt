@@ -1,8 +1,10 @@
 package com.nicekkong.kotlinboot.controller
 
+import com.nicekkong.kotlinboot.config.logger
 import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
 import com.nicekkong.kotlinboot.service.EmployeeService
+import lombok.extern.slf4j.Slf4j
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -10,16 +12,20 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
 
+@Slf4j
 @RestController
 class IndexController (
     val employeeService: EmployeeService,
     val restTemplate:RestTemplate) {
+
+    private val log = logger()
 
     @GetMapping("/save/emp")
     fun saveEmp(@RequestParam(value = "name")name:String) = employeeService.saveEmployee(name)
 
     @GetMapping("/find/emp")
     fun findEmp(@RequestParam(value = "name") name: String): CommonResponse<EmployeeDto> {
+        log.info("call find/emp~!! name: {}", name)
         return employeeService.findEmployee(name)
     }
 

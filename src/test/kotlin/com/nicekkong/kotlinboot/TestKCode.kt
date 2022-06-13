@@ -148,4 +148,21 @@ class TestKCode {
         println(regex)
 
     }
+
+    @Test
+    fun `takeIf test`() {
+
+        val ranges = 1..10
+
+        val a = 50
+
+        a.takeIf{a in ranges}?.let{
+            println("a ===> ${it}")
+        }
+
+
+
+
+
+    }
 }

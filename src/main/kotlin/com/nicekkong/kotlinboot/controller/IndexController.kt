@@ -42,6 +42,13 @@ class IndexController (
 
     @GetMapping(value = ["/findId"])
     fun findId(@RequestParam(value="id")id:Long): ResponseEntity<CommonResponse<EmployeeDto>> {
+        val test = IntRange(1, 10)
+
+        test.takeIf{id !in test}?.let{
+            println("TEST Success~!!! $test")
+        }
+
+
 
         return ResponseEntity(HttpStatus.OK)
     }

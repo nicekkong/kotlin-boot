@@ -1,15 +1,15 @@
 package com.nicekkong.kotlinboot.controller
 
 import com.nicekkong.kotlinboot.config.logger
+import com.nicekkong.kotlinboot.dto.request.EmployeeRequest
 import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
+import com.nicekkong.kotlinboot.dto.response.EmployeeResponse
 import com.nicekkong.kotlinboot.service.EmployeeService
 import lombok.extern.slf4j.Slf4j
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.client.RestTemplate
 
 @Slf4j
@@ -53,10 +53,44 @@ class IndexController (
         test.takeIf{id !in test}?.let{
             println("TEST Success~!!! $test")
         }
-
-
-
         return ResponseEntity(HttpStatus.OK)
+    }
+
+
+    @GetMapping(value = ["/save/emp/info"])
+    fun saveEmpInfo(empInfo: EmployeeRequest) {
+
+        log.info(empInfo.toString())
+
+        log.info("GET:::empInfo.deptName ===> ${empInfo.deptName}")
+
+
+    }
+
+    @PostMapping(value = ["/save/emp/info"])
+    fun saveEmpInfoByPost(@RequestBody empInfo: EmployeeRequest)
+                            : ResponseEntity<CommonResponse<EmployeeResponse>>{
+
+        log.info(empInfo.toString())
+
+        log.info("POST:::empInfo.deptName ===> ${empInfo.deptName}")
+
+
+        val empInfo = EmployeeResponse(
+            id = 99L,
+            name = empInfo.name,
+            job = empInfo.job,
+        )
+
+        val result = CommonResponse<EmployeeResponse>().apply {
+            code = "00"
+            message = "Success"
+            body = empInfo
+        }
+
+
+        return ResponseEntity(result, HttpStatus.OK)
+
     }
 
 }

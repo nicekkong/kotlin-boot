@@ -12,12 +12,12 @@ class Employee(
     @Column
     var name:String? = null,
     @Column
-    var deptName:String? = null,
+    var job:String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="dept_id")
     var dept:Department? = null
-) {
+) : CommonDateEntity() {
     override fun toString() = "Employee : $id $name"
 
     fun addDept(dept:Department) {

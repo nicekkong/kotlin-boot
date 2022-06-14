@@ -22,7 +22,7 @@ class EmployeeService(
     fun findEmployee(name:String): CommonResponse<EmployeeDto> {
 
         val employee = employeeRepository.findByNameContains(name)
-        println(employee.name)
+        println(employee.map { it.name }.orElse(null))
 
         val emp = Employee().apply {
             this.name = "nicekkong"
@@ -34,7 +34,7 @@ class EmployeeService(
             emp.message = "Success"
             emp.body = EmployeeDto().apply {
 //                this.id = employee.id.toLong()
-                this.name = employee.name
+                this.name = employee.takeIf { it.isPresent }?.let{name}
             }
         }
 
@@ -46,8 +46,6 @@ class EmployeeService(
         val e1 = Employee().apply {
             this.name = "asdf"
         }
-
-
 
         return employeeResponse
 

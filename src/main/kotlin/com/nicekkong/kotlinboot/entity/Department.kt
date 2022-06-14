@@ -16,7 +16,7 @@ class Department (
 
     @OneToMany(mappedBy = "dept")
     var employees: MutableSet<Employee> = TreeSet()
-        ) {
+        ): CommonDateEntity() {
 
     fun addEmployee(emp:Employee) {
         this.employees.add(emp)

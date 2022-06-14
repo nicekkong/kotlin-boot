@@ -57,18 +57,20 @@ class IndexController (
     }
 
 
-    @GetMapping(value = ["/save/emp/info"])
-    fun saveEmpInfo(empInfo: EmployeeRequest) {
+    @GetMapping(value = ["/get/emp/info"])
+    fun getEmpInfo(empInfo: EmployeeRequest): Map<String, String> {
 
         log.info(empInfo.toString())
 
         log.info("GET:::empInfo.deptName ===> ${empInfo.deptName}")
 
 
+        return mapOf("code" to "0000")
+
     }
 
-    @PostMapping(value = ["/save/emp/info"])
-    fun saveEmpInfoByPost(@RequestBody empInfo: EmployeeRequest)
+    @PostMapping(value = ["/post/emp/info"])
+    fun postEmpInfoByPost(@RequestBody empInfo: EmployeeRequest)
                             : ResponseEntity<CommonResponse<EmployeeResponse>>{
 
         log.info(empInfo.toString())
@@ -82,14 +84,30 @@ class IndexController (
             job = empInfo.job,
         )
 
-        val result = CommonResponse<EmployeeResponse>().apply {
-            code = "00"
-            message = "Success"
-            body = empInfo
-        }
+        val result = CommonResponse<EmployeeResponse>(
+            code = "00",
+            message = "Success",
+            body = empInfo,
+        )
+        return ResponseEntity(result, HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/save/emp/info"])
+    fun saveEmpInfo(@RequestBody empInfo: EmployeeRequest)
+                        : ResponseEntity<CommonResponse<Nothing>> {
+
+
+        employeeService.saveEmpInfo(empInfo)
+
+        val result = CommonResponse(
+            code = "00",
+            message = "Success",
+            body = null,
+        )
 
 
         return ResponseEntity(result, HttpStatus.OK)
+
 
     }
 

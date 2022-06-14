@@ -1,25 +1,30 @@
 package com.nicekkong.kotlinboot.service
 
+import com.nicekkong.kotlinboot.dto.request.EmployeeRequest
 import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
+import com.nicekkong.kotlinboot.entity.Department
 import com.nicekkong.kotlinboot.entity.Employee
 import com.nicekkong.kotlinboot.entity.Student
+import com.nicekkong.kotlinboot.repository.DepartmentRepository
 import com.nicekkong.kotlinboot.repository.EmployeeRepository
 import com.nicekkong.kotlinboot.repository.findId
 import org.springframework.stereotype.Service
 
 @Service
 class EmployeeService(
-    val employeeRepository: EmployeeRepository) {
+    val employeeRepository: EmployeeRepository,
+    val departmentRepository: DepartmentRepository,
+) {
 
-    fun saveEmployee(name:String) {
+    fun saveEmployee(name: String) {
         val employee = Employee().apply {
             this.name = name
         }
         employeeRepository.save(employee)
     }
 
-    fun findEmployee(name:String): CommonResponse<EmployeeDto> {
+    fun findEmployee(name: String): CommonResponse<EmployeeDto> {
 
         val employee = employeeRepository.findByNameContains(name)
         println(employee.map { it.name }.orElse(null))
@@ -28,19 +33,19 @@ class EmployeeService(
             this.name = "nicekkong"
         }
 
-        var employeeResponse:CommonResponse<EmployeeDto> = CommonResponse()
+        var employeeResponse: CommonResponse<EmployeeDto> = CommonResponse()
         employeeResponse.let { emp ->
             emp.code = "0000"
             emp.message = "Success"
             emp.body = EmployeeDto().apply {
 //                this.id = employee.id.toLong()
-                this.name = employee.takeIf { it.isPresent }?.let{name}
+                this.name = employee.takeIf { it.isPresent }?.let { name }
             }
         }
 
         val s1 = Student().apply {
             id = 1
-            this.name= "asdf"
+            this.name = "asdf"
         }
 
         val e1 = Employee().apply {
@@ -55,7 +60,7 @@ class EmployeeService(
 
         val employee = employeeRepository.findById(id).get()
 
-        var employeeResponse:CommonResponse<EmployeeDto> = CommonResponse()
+        var employeeResponse: CommonResponse<EmployeeDto> = CommonResponse()
         employeeResponse.let { emp ->
             emp.code = "0000"
             emp.message = "Success"
@@ -65,18 +70,16 @@ class EmployeeService(
             }
         }
         return employeeResponse
+    }
 
 
-        }
-
-
-        fun searchById(id:Long): EmployeeDto? {
-            return employeeRepository.findId(id).let{
-                EmployeeDto().apply {
-                    this.id = it.id
-                    this.name = it.name
-                }
+    fun searchById(id: Long): EmployeeDto? {
+        return employeeRepository.findId(id).let {
+            EmployeeDto().apply {
+                this.id = it.id
+                this.name = it.name
             }
+        }
 
 //            return employeeRepository.findId(id).orElse(null)?.let {
 //                EmployeeDto().apply {
@@ -84,5 +87,27 @@ class EmployeeService(
 //                    this.name = it.name
 //                }
 //            }
+    }
+
+
+    fun saveEmpInfo(empInfo:EmployeeRequest) {
+
+        val deptInfo = empInfo
+            .takeUnless {
+                departmentRepository.existsByDeptName(it.deptName)
+            }?.let {
+                departmentRepository.save(
+                    Department().apply {
+                        deptName = empInfo.deptName
+                    }
+                )
+            }?: departmentRepository.findByDeptName(empInfo.deptName)
+
+        val emp:Employee = Employee().apply {
+            name = empInfo.name
+            job = empInfo.job
         }
+        emp.addDept(deptInfo)
+        employeeRepository.save(emp)
+    }
 }

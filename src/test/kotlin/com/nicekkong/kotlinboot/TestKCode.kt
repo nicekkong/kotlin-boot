@@ -156,13 +156,8 @@ class TestKCode {
 
         val a = 50
 
-        a.takeIf{a in ranges}?.let{
+        a.takeIf { a in ranges }?.let {
             println("a ===> ${it}")
         }
-
-
-
-
-
     }
 }

@@ -61,9 +61,7 @@ class IndexController (
     fun getEmpInfo(empInfo: EmployeeRequest): Map<String, String> {
 
         log.info(empInfo.toString())
-
         log.info("GET:::empInfo.deptName ===> ${empInfo.deptName}")
-
 
         return mapOf("code" to "0000")
 

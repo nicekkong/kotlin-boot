@@ -17,6 +17,8 @@ allOpen {
 
 noArg {
     annotation("javax.persistence.Entity")
+    annotation("javax.persistence.MappedSuperclass")
+    annotation("javax.persistence.Embeddable")
 }
 
 group = "com.nicekkong"
@@ -40,6 +42,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    // 지연로딩 되는 객체의 프로퍼티 직렬
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.8")
     compileOnly("org.projectlombok:lombok")
 //    runtimeOnly("com.h2database:h2")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client:2.7.4")

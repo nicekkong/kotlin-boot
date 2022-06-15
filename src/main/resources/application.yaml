@@ -16,7 +16,7 @@ spring:
   jpa:
     hibernate:
 #      ddl-auto: none # dummy data 추가하기 위한 설정
-      ddl-auto: create-drop
+      ddl-auto: update
 #    show-sql: true
     properties:
       hibernate:

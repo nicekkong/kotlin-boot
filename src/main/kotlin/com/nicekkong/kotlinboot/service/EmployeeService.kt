@@ -110,4 +110,22 @@ class EmployeeService(
         emp.addDept(deptInfo)
         employeeRepository.save(emp)
     }
+
+
+    fun saveProject() {
+        val deptment:Department = Department(
+            deptName = "IT팀"
+        
+        )
+        val emp:Employee = Employee(
+            name = "기획팀",
+            job = "Developer"
+        )
+        emp.addDept(deptment)
+
+
+
+
+
+    }
 }

@@ -30,10 +30,14 @@ spring:
       schema-locations: classpath:sql/schema.sql
 
 logging:
+  config: classpath:logback/logback.xml
+
   level:
     org.hibernate:
       type.descriptor.sql: trace
       SQL: DEBUG
+
+
 
 
 

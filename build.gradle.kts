@@ -43,12 +43,20 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
     // 지연로딩 되는 객체의 프로퍼티 직렬
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.8")
+
+    // KLogger
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
+
     compileOnly("org.projectlombok:lombok")
 //    runtimeOnly("com.h2database:h2")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client:2.7.4")
+
     annotationProcessor("org.projectlombok:lombok")
+
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 //    testImplementation("io.kotlintest:kotlintest:2.0.7")
     testImplementation("io.kotest:kotest-runner-junit5:5.3.1")

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+<configuration>
+
+    <!-- 로그 파일을 적재할 디렉토리 경로를 지정 -->
+    <property name="LOG_FILE_PATH" value="/Users/nicekkong/Desktop/intellij_repo/logs"/>
+    <!-- 로그 파일을 적재할 파일 이름을 지정 -->
+    <property name="LOG_FILE_NAME" value="kotlin-boot"/>
+
+    <!-- TEXT_CONSOLE 어펜더 정의 -->
+    <!-- 로컬 개발 환경에 적합 -->
+    <appender name="TEXT_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- TEXT_FILE 어펜더 정의 -->
+    <!-- 운영 환경에 적합 -->
+    <!-- 일자별로 로그 파일을 적재하되, 100MB를 초과하면 로그 파일 분할 -->
+    <!-- 최대 7일치를 보관하고 나머지는 삭제, 최대 1GB를 초과해도 나머지를 삭제 -->
+    <appender name="TEXT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_PATH}/${LOG_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}/${LOG_FILE_NAME}_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- INFO 레벨 이하 로그는 TEXT_FILE 어펜더로 로그 적재 -->
+    <root level="INFO">
+        <appender-ref ref="TEXT_FILE"/>
+    </root>
+
+</configuration>

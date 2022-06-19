@@ -12,7 +12,7 @@ class Project (
     @Column(nullable = false)
     var title:String,
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emp_id", nullable = true)
-    var employee: Employee?
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "emp_id", nullable = true)
+//    var employee: Employee?
 )

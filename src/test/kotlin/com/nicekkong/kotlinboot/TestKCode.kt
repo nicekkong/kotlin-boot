@@ -160,4 +160,25 @@ class TestKCode {
             println("a ===> ${it}")
         }
     }
+
+
+//    class MyTests: ShouldSpec(){
+//        init {
+//            "string size" {
+//                "hello".length shouldBe 5
+//            }
+//        }
+//
+//    }
+//
+//    @Test
+//    fun `test test`() {
+//
+//        var test = MyTests()
+//
+//    }
+
+
+
+
 }

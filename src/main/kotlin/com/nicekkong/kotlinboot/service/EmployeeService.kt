@@ -8,6 +8,7 @@ import com.nicekkong.kotlinboot.entity.Employee
 import com.nicekkong.kotlinboot.entity.Student
 import com.nicekkong.kotlinboot.repository.DepartmentRepository
 import com.nicekkong.kotlinboot.repository.EmployeeRepository
+import com.nicekkong.kotlinboot.repository.MappingRepository
 import com.nicekkong.kotlinboot.repository.findId
 import org.springframework.stereotype.Service
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service
 class EmployeeService(
     val employeeRepository: EmployeeRepository,
     val departmentRepository: DepartmentRepository,
+    val mappingRepository: MappingRepository
 ) {
 
     fun saveEmployee(name: String) {
@@ -115,7 +117,7 @@ class EmployeeService(
     fun saveProject() {
         val deptment:Department = Department(
             deptName = "IT팀"
-        
+
         )
         val emp:Employee = Employee(
             name = "기획팀",
@@ -124,8 +126,37 @@ class EmployeeService(
         emp.addDept(deptment)
 
 
+        var ttt:Array<Int>
+        var ttt1:List<Int>
 
 
+
+        val funT = {v1:Int, v2:Int -> v1 + v2}
+        val ggg = funT(1, 2)
+        print(ggg)
 
     }
+
+    open class Fruit
+    class Apple:Fruit()
+    class Banana:Fruit()
+
+
+    fun copyFromTo(from: Array<out Fruit>, to: Array<in Fruit>) {
+        for (i in from.indices) {
+            to[i] = from[i]
+        }
+    }
+
+    fun copyFromTo2(from: Array<Fruit>, to: Array<Fruit>) {
+        for (i in from.indices) {
+            to[i] = from[i]
+        }
+    }
+
+
+
+    fun countMapping():Int = mappingRepository.findAll().size
+
+
 }

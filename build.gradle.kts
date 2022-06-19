@@ -35,6 +35,7 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -49,6 +50,14 @@ dependencies {
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client:2.7.4")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+//    testImplementation("io.kotlintest:kotlintest:2.0.7")
+    testImplementation("io.kotest:kotest-runner-junit5:5.3.1")
+    testImplementation("io.kotest:kotest-assertions-core:5.3.1")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
+
+
+
+
 }
 
 tasks.withType<KotlinCompile> {
@@ -61,3 +70,8 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+// Spring 2.6.8 이하에서 KoTest 사용시, kotlin-coroutines 버전이 1.5.2를 지정되어 오류 발생
+//https://velog.io/@dokkabei97/Kotest-ClassNotFoundException
+extra["kotlin-coroutines.version"] = "1.6.1"
+

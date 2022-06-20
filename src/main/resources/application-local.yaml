@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  jpa:
+    hibernate:
+#      ddl-auto: none # dummy data 추가하기 위한 설정
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+#        dialect: org.hibernate.dialect.H2Dialect
+  sql:  # dummy data 추가
+    init:
+      mode: never
+      continue-on-error: true
+      data-locations: classpath:sql/data.sql
+      schema-locations: classpath:sql/schema.sql
+
+logging:
+  config: classpath:logback/logback-${spring.config.activate.on-profile}.xml
+  level:
+    org.hibernate:
+      type.descriptor.sql: trace
+      SQL: DEBUG
+
+
+my:
+  info:
+    name: kong
+    email: nicekkong@gmail.com
+
+
+
+
+
+
+

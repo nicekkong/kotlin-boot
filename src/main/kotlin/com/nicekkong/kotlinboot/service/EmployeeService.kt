@@ -10,7 +10,11 @@ import com.nicekkong.kotlinboot.repository.DepartmentRepository
 import com.nicekkong.kotlinboot.repository.EmployeeRepository
 import com.nicekkong.kotlinboot.repository.MappingRepository
 import com.nicekkong.kotlinboot.repository.findId
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
+
+
+private val logger = KotlinLogging.logger{}
 
 @Service
 class EmployeeService(
@@ -20,6 +24,9 @@ class EmployeeService(
 ) {
 
     fun saveEmployee(name: String) {
+
+        logger.info { "Name ::: $name"}
+
         val employee = Employee().apply {
             this.name = name
         }

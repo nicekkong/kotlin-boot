@@ -11,15 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.stereotype.Component
-import org.springframework.stereotype.Repository
-import org.springframework.stereotype.Service
 import org.springframework.test.annotation.Rollback
-import org.springframework.test.context.junit.jupiter.SpringExtension
 import kotlin.collections.List
 
 /**
  * KoTest를 통한 테스트 방법
+ * inteliJ를 사용하는 경우 KoTest plugin을 설치해야 test run & debug 가능하다.
  * https://kotest.io/
  * cf. https://techblog.woowahan.com/5825/
  *
@@ -94,8 +91,7 @@ internal class SpringBeanTest @Autowired constructor(
 ): DescribeSpec({
     isolationMode = IsolationMode.InstancePerLeaf
     val name = sampleService.getMyName()
-    describe("My name is $name")
-    {
+    describe("My name is $name") {
         context("문자열의 길이는") {
             it("9를 반환한다.") {
                 val len = name.length
@@ -141,6 +137,17 @@ class EmpServiceTest: DescribeSpec() {
         this.describe("desc....") {
             context("context....") {
                 it("result....") {
+
+                    val name = sampleService.getMyName()
+                    name.length shouldBe 9
+                }
+            }
+        }
+
+
+        this.describe("desc2....") {
+            context("context2....") {
+                it("result2....") {
 
                     val name = sampleService.getMyName()
                     name.length shouldBe 9

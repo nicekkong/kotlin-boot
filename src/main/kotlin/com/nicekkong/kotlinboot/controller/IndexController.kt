@@ -36,9 +36,11 @@ class IndexController (
 
     @GetMapping("/find/emp")
     fun findEmp(@RequestParam(value = "name") name: String): CommonResponse<EmployeeDto> {
+        logger.debug { "DEBUG~!!!!!!!" }
         logger.info("call find/emp~!! name: {}", name)
         logger.info{ "myName ===> $myName"}
         logger.info{ "myEmail ===> $myEmail"}
+        logger.error{"ERROR~!!!!"}
         return employeeService.findEmployee(name)
     }
 

@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- https://ckddn9496.tistory.com/79?category=428336 -->
 <configuration>
 
     <property name="LOG_HOME" value="/Users/nicekkong/Desktop/intellij_repo/logs/kotlin-boot" />
 
-<!--    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
-<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
-<!--            <Pattern>-->
-<!--                %d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%30.30logger{30} -> %-20.20method] - %msg%n%ex{full}-->
-<!--            </Pattern>-->
-<!--        </layout>-->
-<!--    </appender>-->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>
-                [%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} - %msg%n
-            </Pattern>
-        </layout>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%30.30logger{30} [%file:%line] %-20.20method] - %msg%n</pattern>
+        </encoder>
     </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 로그 파일 경로 설정 -->
+        <file>${LOG_HOME}/info.log</file>
+        <!-- 출력패턴 설정 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>%highlight(%-5level) %date [%thread] %cyan([%C{0}::%M L.%L]) - %msg%n</pattern>
+        </encoder>
+        <!-- Rolling 정책 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- .gz,.zip 등을 넣으면 자동 일자별 로그파일 압축 -->
+            <fileNamePattern>${LOG_PATH}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 일자별 로그파일 최대 보관주기(~일), 해당 설정일 이상된 파일은 자동으로 제거 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
 
     <appender name="FILE_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
                 <file>${LOG_HOME}/debug.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%30.30logger{30} -> %-20.20method] - %msg%n%ex{full}
+                %d{yyyy-MM-dd HH:mm:ss}[%thread]%highlight(%-5level) [%30.30logger{30} -> %-20.20method] - %msg%n
             </Pattern>
         </encoder>
                 <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -36,69 +50,64 @@
                 </rollingPolicy>
     </appender>
 
-    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-                <file>${LOG_HOME}/error.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%30.30logger{30} -> %-20.20method] - %msg%n%ex{full}
-            </Pattern>
-        </encoder>
-                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                    <!-- rollover daily -->
-                    <fileNamePattern>${LOG_HOME}/backup/error.%d{yyyy-MM-dd}.%i.log
-                    </fileNamePattern>
-                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                        <maxFileSize>10MB</maxFileSize>
-                    </timeBasedFileNamingAndTriggeringPolicy>
-                </rollingPolicy>
-    </appender>
 
-    <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_HOME}/info.log</file>
+<!--    <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>${LOG_HOME}/info.log</file>-->
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>INFO</level>-->
+<!--            <onMatch>ACCEPT</onMatch> &lt;!&ndash; 해당 레벨만 기록한다. &ndash;&gt;-->
+<!--            <onMismatch>ACCEPT</onMismatch> &lt;!&ndash; DENY:  다른 수준의 레벨은 기록하지 않는다.(상위 레벨도 기록 안함), 상위 수준의 레벨에 대한 기록을 원하면 ACCEPT 로 하면 기록된다. &ndash;&gt;-->
+<!--        </filter>-->
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--            <Pattern>-->
+<!--                %d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%30.30logger{30} -> %-20.20method] - %msg%n-->
+<!--            </Pattern>-->
+<!--        </layout>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; rollover daily &ndash;&gt;-->
+<!--            <fileNamePattern>${LOG_HOME}/backup/info.%d{yyyy-MM-dd}.%i.log-->
+<!--            </fileNamePattern>-->
+<!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+<!--                <maxFileSize>10MB</maxFileSize>-->
+<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
+<!--            <maxHistory>180</maxHistory>-->
+<!--        </rollingPolicy>-->
+<!--    </appender>-->
+
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/error.log</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
+            <level>ERROR</level>
             <onMatch>ACCEPT</onMatch> <!-- 해당 레벨만 기록한다. -->
             <onMismatch>ACCEPT</onMismatch> <!-- DENY:  다른 수준의 레벨은 기록하지 않는다.(상위 레벨도 기록 안함), 상위 수준의 레벨에 대한 기록을 원하면 ACCEPT 로 하면 기록된다. -->
         </filter>
-<!--        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
-<!--            <Pattern>-->
-<!--                %d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%30.30logger{30} -> %-20.20method] - %msg%n%ex{full}-->
-<!--            </Pattern>-->
-<!--        </encoder>-->
-
-
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
                 %d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) [%30.30logger{30} -> %-20.20method] - %msg%n%ex{full}
             </Pattern>
         </layout>
-
-
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <!-- rollover daily -->
-                <fileNamePattern>${LOG_HOME}/backup/info.%d{yyyy-MM-dd}.%i.log
-                </fileNamePattern>
-                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                    <maxFileSize>10MB</maxFileSize>
-                </timeBasedFileNamingAndTriggeringPolicy>
-                <maxHistory>180</maxHistory>
-            </rollingPolicy>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_HOME}/backup/error.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>180</maxHistory>
+        </rollingPolicy>
     </appender>
+
 
 
     <!-- Send logs to both console and file audit -->
     <root level="INFO"> <!-- root level="OFF" -->
         <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
     </root>
 
     <logger name="com.nicekkong.kotlinboot" additivity="false">
         <level value="DEBUG" />
         <appender-ref ref="STDOUT"/>
-    </logger>
-
-    <logger name="com.nicekkong.kotlinboot" additivity="false">
-        <level value="ERROR" />
-        <appender-ref ref="FILE_INFO"/>
     </logger>
 
 <!--    <logger name="org.springframework.boot.orm.jpa" level="INFO">-->

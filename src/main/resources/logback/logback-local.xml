@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- https://ckddn9496.tistory.com/79?category=428336 -->
+
 <configuration>
 
     <property name="LOG_HOME" value="/Users/nicekkong/Desktop/intellij_repo/logs/kotlin-boot" />

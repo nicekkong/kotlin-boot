@@ -20,6 +20,7 @@ import kotlin.collections.List
  * https://kotest.io/
  * cf. https://techblog.woowahan.com/5825/
  *
+ *
  */
 internal class SampleOfKoTest :AnnotationSpec() {
 

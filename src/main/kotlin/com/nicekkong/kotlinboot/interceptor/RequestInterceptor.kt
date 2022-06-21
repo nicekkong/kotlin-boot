@@ -11,17 +11,13 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 
-private val logger = KotlinLogging.logger {}
-
-
 @Component
 class RequestInterceptor : HandlerInterceptor {
 
-    private val log = logger()
+    private val logger = KotlinLogging.logger {}
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         logger.info{"[klog]request.getRequestURL() => ${request.requestURL}"}
-        log.info("[log]request.getRequestURL() => ${request.requestURL}")
         return super.preHandle(request, response, handler)
     }
 
@@ -32,9 +28,10 @@ class RequestInterceptor : HandlerInterceptor {
         modelAndView: ModelAndView?
     ) {
         (response.status).takeIf{it != 200}?.let { status ->
-            log.error("Response Status => $status , URL => ${request.requestURI}")
+            logger.error("Request => $status , URL => ${request.requestURI}")
+            logger.error("Response Status => $status , URL => ${request.requestURI}")
             val stream:ServletOutputStream = response.outputStream
-            log.error("Error!! $stream")
+            logger.error("Error!! $stream")
         }
         super.postHandle(request, response, handler, modelAndView)
     }

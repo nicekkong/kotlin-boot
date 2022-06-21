@@ -40,7 +40,8 @@ class IndexController (
         logger.info("call find/emp~!! name: {}", name)
         logger.info{ "myName ===> $myName"}
         logger.info{ "myEmail ===> $myEmail"}
-        logger.error{"ERROR~!!!!"}
+        logger.error{"ERROR~!!!!!!!"}
+        logger.debug{"DEBUG~!!!!!!!"}
         return employeeService.findEmployee(name)
     }
 

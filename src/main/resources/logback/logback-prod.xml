@@ -69,7 +69,7 @@
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>ACCEPT</onMatch> <!-- 해당 레벨만 기록한다. -->
-            <onMismatch>DENY</onMismatch> <!-- DENY:  다른 수준의 레벨은 기록하지 않는다.(상위 레벨도 기록 안함), 상위 수준의 레벨에 대한 기록을 원하면 ACCEPT 로 하면 기록된다. -->
+            <onMismatch>ACCEPT</onMismatch> <!-- DENY:  다른 수준의 레벨은 기록하지 않는다.(상위 레벨도 기록 안함), 상위 수준의 레벨에 대한 기록을 원하면 ACCEPT 로 하면 기록된다. -->
         </filter>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <charset>UTF-8</charset>
@@ -90,14 +90,24 @@
 
     <!-- Send logs to both console and file audit -->
     <root level="INFO"> <!-- root level="OFF" -->
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE_INFO"/>
     </root>
 
+
     <logger name="com.nicekkong.kotlinboot" additivity="false">
-        <level value="DEBUG" />
-        <appender-ref ref="STDOUT"/>
+        <level value="ERROR" />
+        <appender-ref ref="FILE_ERROR"/>
     </logger>
 
+    <logger name="com.nicekkong.kotlinboot" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="FILE_INFO"/>
+    </logger>
+
+<!--    <logger name="com.nicekkong.kotlinboot" additivity="false">-->
+<!--        <level value="DEBUG" />-->
+<!--        <appender-ref ref="FILE_DEBUG"/>-->
+<!--    </logger>-->
 
 
     <!--    <logger name="org.springframework.boot.orm.jpa" level="INFO">-->

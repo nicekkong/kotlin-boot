@@ -19,6 +19,7 @@ noArg {
     annotation("javax.persistence.Entity")
     annotation("javax.persistence.MappedSuperclass")
     annotation("javax.persistence.Embeddable")
+    annotation("com.nicekkong.kotlinboot.component.NoArgs")
 }
 
 group = "com.nicekkong"
@@ -43,6 +44,10 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    // ModelMapper
+    implementation("org.modelmapper:modelmapper:3.1.0")
+
 
     // 지연로딩 되는 객체의 프로퍼티 직렬
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.8")

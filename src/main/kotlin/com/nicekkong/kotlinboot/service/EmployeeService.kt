@@ -5,6 +5,7 @@ import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
 import com.nicekkong.kotlinboot.entity.Department
 import com.nicekkong.kotlinboot.entity.Employee
+import com.nicekkong.kotlinboot.entity.Mapping
 import com.nicekkong.kotlinboot.entity.Student
 import com.nicekkong.kotlinboot.repository.DepartmentRepository
 import com.nicekkong.kotlinboot.repository.EmployeeRepository
@@ -141,6 +142,11 @@ class EmployeeService(
         val funT = {v1:Int, v2:Int -> v1 + v2}
         val ggg = funT(1, 2)
         print(ggg)
+
+
+        var m = Mapping(senderId = 1L)
+        m.senderId = 2L
+        mappingRepository.save(m)
 
     }
 

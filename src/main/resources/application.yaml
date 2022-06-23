@@ -15,6 +15,7 @@ spring:
     password: bootuser!@
 
 
+
 logging:
 #  config: classpath:logback/logback.xml
   level:

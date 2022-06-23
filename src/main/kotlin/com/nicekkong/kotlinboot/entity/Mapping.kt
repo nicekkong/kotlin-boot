@@ -6,8 +6,8 @@ import javax.persistence.*
 class Mapping (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+    val id: Long? = null,
 
     @Column
-    val senderId: Long,
+    var senderId: Long,
         )

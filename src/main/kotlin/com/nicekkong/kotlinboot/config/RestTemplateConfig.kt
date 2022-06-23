@@ -13,6 +13,11 @@ class RestTemplateConfig{
 
     @Bean
     fun restTemplate():RestTemplate {
+        val restTemplate = RestTemplateBuilder()
+
+
+
+
         return RestTemplateBuilder().build()
     }
 }

@@ -98,7 +98,7 @@ class IndexController (
             job = empInfo.job,
         )
 
-        val result = CommonResponse<EmployeeResponse>(
+        val result = CommonResponse(
             code = "00",
             message = "Success",
             body = empInfo,

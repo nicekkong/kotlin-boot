@@ -1,7 +1,5 @@
 package com.nicekkong.kotlinboot.interceptor
 
-import com.nicekkong.kotlinboot.config.logger
-import mu.KLogging
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor

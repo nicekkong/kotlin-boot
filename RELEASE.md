@@ -11,8 +11,8 @@
 - LocalCache 설정
     - ehCache 설정
 - Exception에 따른 공통 처리
-- mapper 설정
-  - modelMapper
+- [완료]mapper 설정
+  - modelMapper: Kotlin에 부가적으로 코딩이 많아져서 사용하지 않음...(noArgs 필수 등)
   - mapStruct
 
 ### Need to Fix.

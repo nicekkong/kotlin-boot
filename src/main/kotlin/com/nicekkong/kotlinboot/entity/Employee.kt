@@ -22,12 +22,12 @@ class Employee(
 
     fun addDept(dept:Department) {
         if(this.dept != null) {
-            this.dept!!.employees.remove(this)
+            this.dept!!.employees?.remove(this)
         }
         this.dept = dept
 
-        if(!dept.employees.contains(this)) {
-            dept.employees.add(this)
+        if(dept.employees?.contains(this) == true) {
+            dept.employees?.add(this)
         }
     }
 }

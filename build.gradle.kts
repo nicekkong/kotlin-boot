@@ -7,6 +7,8 @@ plugins {
     kotlin("plugin.spring") version "1.6.10"
     kotlin("plugin.jpa") version "1.6.10"
     kotlin ("plugin.noarg") version "1.5.21"
+    kotlin("kapt") version "1.5.10" // java annotation Process for Kotlin
+
 }
 
 allOpen {
@@ -48,6 +50,10 @@ dependencies {
     // ModelMapper
     implementation("org.modelmapper:modelmapper:3.1.0")
 
+    // mapStruct
+    implementation("org.mapstruct:mapstruct:1.5.2.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.2.Final")
+//    implementation("org.mapstruct:mapstruct-processor:1.5.2.Final")
 
     // 지연로딩 되는 객체의 프로퍼티 직렬
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.8")
@@ -61,13 +67,23 @@ dependencies {
 
     annotationProcessor("org.projectlombok:lombok")
 
-
+    // test module
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-//    testImplementation("io.kotlintest:kotlintest:2.0.7")
     testImplementation("io.kotest:kotest-runner-junit5:5.3.1")
     testImplementation("io.kotest:kotest-assertions-core:5.3.1")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
+    kaptTest("org.mapstruct:mapstruct-processor:1.5.2.Final")
 }
+
+kapt {
+    arguments {
+        // Set Mapstruct Configuration options here
+        // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
+        // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
+         arg("mapstruct.defaultComponentModel", "spring")
+    }
+}
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

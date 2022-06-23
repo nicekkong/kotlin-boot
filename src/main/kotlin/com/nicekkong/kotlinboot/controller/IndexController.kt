@@ -1,6 +1,5 @@
 package com.nicekkong.kotlinboot.controller
 
-import com.nicekkong.kotlinboot.config.logger
 import com.nicekkong.kotlinboot.dto.request.EmployeeRequest
 import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto

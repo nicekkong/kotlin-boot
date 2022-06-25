@@ -5,6 +5,7 @@ import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
 import com.nicekkong.kotlinboot.dto.response.EmployeeResponse
 import com.nicekkong.kotlinboot.service.EmployeeService
+import com.nicekkong.kotlinboot.service.SampleService
 import lombok.extern.slf4j.Slf4j
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
@@ -17,7 +18,10 @@ import org.springframework.web.client.RestTemplate
 @RestController
 class IndexController (
     val employeeService: EmployeeService,
-    val restTemplate:RestTemplate) {
+    val restTemplate:RestTemplate,
+    val sampleService: SampleService
+
+    ) {
 
 //    private val log = logger()
 
@@ -41,6 +45,11 @@ class IndexController (
         logger.info{ "myEmail ===> $myEmail"}
         logger.error{"ERROR~!!!!!!!"}
         logger.debug{"DEBUG~!!!!!!!"}
+
+        sampleService.myBatis()
+
+        throw Exception()
+
         return employeeService.findEmployee(name)
     }
 

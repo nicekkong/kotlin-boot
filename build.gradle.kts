@@ -15,6 +15,8 @@ allOpen {
     annotation("javax.persistence.Entity")
     annotation("javax.persistence.MappedSuperclass")
     annotation("javax.persistence.Embeddable")
+    annotation("org.apache.ibatis.annotations.Mapper")
+
 }
 
 noArg {
@@ -22,6 +24,7 @@ noArg {
     annotation("javax.persistence.MappedSuperclass")
     annotation("javax.persistence.Embeddable")
     annotation("com.nicekkong.kotlinboot.component.NoArgs")
+    annotation("org.apache.ibatis.annotations.Mapper")
 }
 
 group = "com.nicekkong"
@@ -47,6 +50,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    // MyBatis
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
+
     // ModelMapper
     implementation("org.modelmapper:modelmapper:3.1.0")
 
@@ -61,6 +67,9 @@ dependencies {
     // KLogger
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
 
+    // Humanize
+    implementation("com.github.mfornos:humanize-slim:1.2.2")
+
     compileOnly("org.projectlombok:lombok")
 //    runtimeOnly("com.h2database:h2")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client:2.7.4")
@@ -72,6 +81,12 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:5.3.1")
     testImplementation("io.kotest:kotest-assertions-core:5.3.1")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
+    testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2")
+    testImplementation("io.mockk:mockk:1.12.4")
+    implementation("com.ninja-squad:springmockk:3.1.1")
+
+
+
     kaptTest("org.mapstruct:mapstruct-processor:1.5.2.Final")
 }
 

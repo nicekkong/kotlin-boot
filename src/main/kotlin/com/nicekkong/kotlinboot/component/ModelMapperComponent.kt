@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
 import kotlin.reflect.KParameter
 
+
+// mapStruct 사용으로 modelMapper는 사용하지 않는다.
 //@Component
 class ModelMapperComponent {
 

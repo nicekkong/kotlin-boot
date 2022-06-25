@@ -15,14 +15,14 @@ import mu.KotlinLogging
 import org.springframework.stereotype.Service
 
 
-private val logger = KotlinLogging.logger{}
-
 @Service
 class EmployeeService(
     val employeeRepository: EmployeeRepository,
     val departmentRepository: DepartmentRepository,
     val mappingRepository: MappingRepository
 ) {
+
+    private val logger = KotlinLogging.logger{}
 
     fun saveEmployee(name: String) {
 

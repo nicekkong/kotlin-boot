@@ -26,10 +26,9 @@ class RequestInterceptor : HandlerInterceptor {
         modelAndView: ModelAndView?
     ) {
         (response.status).takeIf{it != 200}?.let { status ->
-            logger.error("Request => $status , URL => ${request.requestURI}")
-            logger.error("Response Status => $status , URL => ${request.requestURI}")
+            logger.error("ERROR_Request => $status , URL => ${request.requestURI}")
+            logger.error("ERROR_Response Status => $status , URL => ${request.requestURI}")
             val stream:ServletOutputStream = response.outputStream
-            logger.error("Error!! $stream")
         }
         super.postHandle(request, response, handler, modelAndView)
     }

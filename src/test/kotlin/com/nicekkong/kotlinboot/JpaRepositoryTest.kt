@@ -2,6 +2,7 @@ package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.entity.Mapping
 import com.nicekkong.kotlinboot.entity.Project
+import com.nicekkong.kotlinboot.mybatis.mapper.ProjectMapper
 import com.nicekkong.kotlinboot.repository.MappingRepository
 import com.nicekkong.kotlinboot.repository.ProjectRepository
 import org.assertj.core.api.Assert
@@ -18,13 +19,18 @@ import org.springframework.transaction.annotation.Transactional
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // TestUnit의 기본 DB인 H2가 아닌 어플리케이션의 DB 접속 정보를 활용한다.
 @Rollback(value = false)
-class RepositoryTest{
+class JpaRepositoryTest{
 
     @Autowired
     private lateinit var projectRepository: ProjectRepository
 
     @Autowired
     private lateinit var mappingRepository: MappingRepository
+
+    @Autowired
+    lateinit var projectMapper:ProjectMapper
+
+
 
     @Test
     @Rollback(value = false)
@@ -59,5 +65,4 @@ class RepositoryTest{
 
         println("senderId : $senderId")
     }
-
 }

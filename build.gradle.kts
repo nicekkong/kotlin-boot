@@ -83,7 +83,7 @@ dependencies {
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2")
     testImplementation("io.mockk:mockk:1.12.4")
-    implementation("com.ninja-squad:springmockk:3.1.1")
+    testImplementation("com.ninja-squad:springmockk:3.1.1")
 
 
 

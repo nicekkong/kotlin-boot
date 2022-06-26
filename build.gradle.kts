@@ -70,8 +70,12 @@ dependencies {
     // Humanize
     implementation("com.github.mfornos:humanize-slim:1.2.2")
 
+    // HttpClient
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")
+
+
     compileOnly("org.projectlombok:lombok")
-//    runtimeOnly("com.h2database:h2")
+    // runtimeOnly("com.h2database:h2")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client:2.7.4")
 
     annotationProcessor("org.projectlombok:lombok")

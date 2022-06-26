@@ -15,7 +15,7 @@ class ModelMapperComponent {
     inline fun <reified T, reified R> mapper(source: T): R {
         R::class.constructors
             .last { constructor ->
-                val mutableMap: MutableMap<KParameter, Any?> = mutableMapOf<KParameter, Any?>()
+                val mutableMap: MutableMap<KParameter, Any?> = mutableMapOf()
                 constructor.parameters.forEach { parameter ->
                     mutableMap[parameter] = T::class.members.find { it.name == parameter.name }?.call(source)
                 }

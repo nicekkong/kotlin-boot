@@ -3,15 +3,15 @@ package com.nicekkong.kotlinboot
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
 import com.nicekkong.kotlinboot.dto.response.TeamDto
 import com.nicekkong.kotlinboot.service.MemberService
-import io.kotest.matchers.ints.beGreaterThan
 import io.kotest.matchers.shouldBe
-import io.mockk.*
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
+import io.mockk.mockk
+import io.mockk.spyk
+import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.ArgumentMatchers.anyLong
-import org.mockito.Mockito.`when`
 
 @ExtendWith(MockKExtension::class)
 class MockKtest {
@@ -31,9 +31,6 @@ class MockKtest {
         every {mock.getMemberInfo(any())} returns EmployeeDto(id = 1, name="nicekkong")
         every {mock.getMemberInfo(1)} returns EmployeeDto(id = 1, name="nicekkong")
         every {mock.getMemberInfo(2)} throws IllegalArgumentException()
-
-//        `when` (mock.getTotalMember()).thenReturn(777)
-//        `when` (mock.getMemberInfo(1)).thenReturn(EmployeeDto(id = 1, name="nicekkong"))
 
 //        verify (exactly = 1) {mock.getTotalMember() }
 //
@@ -78,25 +75,31 @@ class MockKtest {
 
     @Test
     fun `spyk test`() {
-
-        // 원하는 속성값만 설정하여 spy mock을 생성할 수 있다.
+        // 전체 속성 중, 테스트하려는 속성만 설정하여 spy mock을 생성할 수 있다.
         val mockEmp = mockk<TeamDto> {
             every { name } returns "nicekkong"
         }
-
         spyk(mockEmp).getMyName() shouldBe "nicekkong님"
         mockEmp.getMyName() shouldBe "nicekkong님"
 
-
-        // 해당 객체에 대하여 전체 값을 모두 셋팅하지 않아도 정상적으로 객체(Mock)을 생성한다.
-//        val spyTeam = spyk(TeamDto(name = "닉과르"))
+//         해당 객체에 대하여 전체 값을 모두 셋팅하지 않아도 정상적으로 객체(Mock)을 생성한다.
+//        val spyTeam = spyk(TeamDto(name = "닉과르")) // spyk() 에는 유효한 Entity가 들어와야 하는데, id가 누락이 되어 있으므로 초기화 오류 발생
 //        spyTeam.getMyName() shouldBe "닉과르님"
 
     }
 
     @Test
     fun `test when`() {
+        every{
+            mockMemberService.getMemberInfo(range(0L, 100L))
+        } returnsMany  listOf(
+            EmployeeDto(id=1, name="nicekkong1"),
+            EmployeeDto(id=2, name="nicekkong2"),
+            EmployeeDto(id=3, name="nicekkong3"))
 
-        `when` {}
+        mockMemberService.getMemberInfo(100L)?.name shouldBe "nicekkong1"
+        mockMemberService.getMemberInfo(100L)?.name shouldBe "nicekkong2"
+        mockMemberService.getMemberInfo(100L)?.name shouldBe "nicekkong3"
+
     }
 }

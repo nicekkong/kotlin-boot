@@ -1,6 +1,7 @@
 package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.component.MyComponent
+import com.nicekkong.kotlinboot.config.MyConfiguration
 import com.nicekkong.kotlinboot.service.EmployeeService
 import com.nicekkong.kotlinboot.service.SampleService
 import io.kotest.core.extensions.Extension
@@ -56,13 +57,21 @@ class MyRepoTest :ShouldSpec ({
 class SpringAutowiredConstructorTest @Autowired constructor(
     val employeeService: EmployeeService,
     val myComponent: MyComponent,
-    val myCInfo: String
+    val myName: String,
+    val myInfo: String,
+    val myConfiguration: MyConfiguration,
+    val myCInfo: String,
 ) : StringSpec({
     "should return the greeting provided by greeting service" {
         employeeService.countMapping() shouldBe 2
 
-        println(myComponent.myInfo("adsf"))
+        println(myName)
+        println(myInfo)
+        println("myComponent.myInfo(\"컴포넌트\") ===> ${myComponent.myInfo("컴포넌트")}")
+
         println(myCInfo)
+
+        println("myConfiguration.myCInfo('컨피규레이션') ===> ${myConfiguration.myCInfo("컨피규레이션")}")
     }
 })
 //

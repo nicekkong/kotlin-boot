@@ -1,13 +1,15 @@
-package com.nicekkong.kotlinboot.exception
+package com.nicekkong.kotlinboot.exception.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import org.springframework.http.HttpStatus
 import java.time.LocalDateTime
 
 // TODO: 분석 및 사용 여부 판단 필요
 class CustomErrorResponse {
+    var code:Int? = null
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     var timestamp: LocalDateTime? = null
-    var status = 0
-    var error: String? = null
-    var exception:String? = null
+//    var status:Int? = null
+    var errorMessage: String? = null
+    var stackTrace:String? = null
 }

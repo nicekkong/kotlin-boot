@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.client.RestTemplate
+import java.lang.RuntimeException
 
 @Slf4j
 @RestController
@@ -48,7 +49,13 @@ class IndexController (
 
         sampleService.myBatis()
 
-        throw Exception()
+//        try {
+            throw RuntimeException("runtimeException", IllegalArgumentException())
+//        } catch(e:Exception) {
+//
+//            logger.info("catch~!!!!!")
+//
+//        }
 
         return employeeService.findEmployee(name)
     }
@@ -64,6 +71,7 @@ class IndexController (
     @GetMapping(value = ["/find/id"])
     fun findById(@RequestParam(value="id")id:Long): ResponseEntity<CommonResponse<EmployeeDto>> {
         val result = employeeService.findById(id)
+
 
         return ResponseEntity(result, HttpStatus.OK)
 

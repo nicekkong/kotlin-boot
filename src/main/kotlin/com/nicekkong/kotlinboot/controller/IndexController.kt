@@ -50,7 +50,7 @@ class IndexController (
         sampleService.myBatis()
 
 //        try {
-            throw RuntimeException("runtimeException", IllegalArgumentException())
+            throw RuntimeException("runtimeException")
 //        } catch(e:Exception) {
 //
 //            logger.info("catch~!!!!!")

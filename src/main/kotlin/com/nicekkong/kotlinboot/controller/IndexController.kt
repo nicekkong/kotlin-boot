@@ -4,6 +4,7 @@ import com.nicekkong.kotlinboot.dto.request.EmployeeRequest
 import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
 import com.nicekkong.kotlinboot.dto.response.EmployeeResponse
+import com.nicekkong.kotlinboot.exception.UserMessageException
 import com.nicekkong.kotlinboot.service.EmployeeService
 import com.nicekkong.kotlinboot.service.SampleService
 import lombok.extern.slf4j.Slf4j
@@ -50,7 +51,7 @@ class IndexController (
         sampleService.myBatis()
 
 //        try {
-            throw RuntimeException("runtimeException")
+            throw UserMessageException("runtimeException")
 //        } catch(e:Exception) {
 //
 //            logger.info("catch~!!!!!")

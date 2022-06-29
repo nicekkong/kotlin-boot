@@ -24,14 +24,14 @@ class GlobalExceptionHandler {
             ResponseEntity<CustomErrorResponse> {
         logger.error{"[RestControllerAdvice]Error~!! ${ex.stackTraceToString()}"}
 
-//        val exceptionInfo = CustomException(50001, ex.message, ex)
-        val exceptionInfo = UserMessageException(ex.message, ex)
+        val exceptionInfo = CustomException(50001, ex.message, ex)
+//        val exceptionInfo = UserMessageException(ex.message, ex)
 
         val errors = CustomErrorResponse().apply {
             code = exceptionInfo.code
             timestamp = LocalDateTime.now()
             errorMessage = exceptionInfo.message
-            stackTrace = exceptionInfo.cause?.stackTraceToString()
+            stackTrace = exceptionInfo.ex.stackTraceToString()
         }
 
          return ResponseEntity<CustomErrorResponse>(errors, HttpStatus.OK)

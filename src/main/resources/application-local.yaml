@@ -36,7 +36,12 @@ my:
 
 
 
-
+restTemplate:
+  max:
+    conn: 2
+    perRoute: 2
+  connectTimeout: 3
+  readTimeout: 3
 
 
 

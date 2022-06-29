@@ -3,8 +3,8 @@
 ### Add-on
 - LocalCache 설정
     - ehCache 설정
-- Exception에 따른 공통 처리
-- RestTemplate Component
+- [완료]~~Exception에 따른 공통 처리~~
+- [완료] ~~RestTemplate Component~~
 - [완료] ~~Profile 별 환경 분리~~
 - [완료] ~~logback 설정~~
   - logback 설정 https://ckddn9496.tistory.com/79?category=428336
@@ -17,3 +17,4 @@
   - mapStruct
 
 ### Need to Fix.
+- Exception 처리에 따른 공통 모듈 개발

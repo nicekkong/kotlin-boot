@@ -45,6 +45,12 @@ mybatis:
 
 
 
-
+===========================================================
+restTemplate:
+  max:
+    conn: 5
+    perRoute: 5
+  connectTimeout: 3
+  readTimeout: 3
 
 

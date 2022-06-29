@@ -1,6 +1,7 @@
 package com.nicekkong.kotlinboot.config
 
 import org.apache.http.impl.client.HttpClientBuilder
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,17 +13,29 @@ import java.time.Duration
 @Configuration
 class RestTemplateConfig{
 
+    @Value("\${restTemplate.max.conn:5}")
+    private lateinit var maxConn:String
+
+    @Value("\${restTemplate.max.perRoute:5}")
+    private lateinit var maxPerRoute:String
+
+    @Value("\${restTemplate.connectTimeout:3}")
+    private lateinit var connectTimeout:String
+
+    @Value("\${restTemplate.readTimeout:5}")
+    private lateinit var readTimeout:String
+
     @Bean
     fun resTemplate(): RestTemplate {
 
         val httpClient = HttpClientBuilder.create()
-            .setMaxConnTotal(3000)
-            .setMaxConnPerRoute(3000)
+            .setMaxConnTotal(maxConn.toInt())
+            .setMaxConnPerRoute(maxPerRoute.toInt())
             .build()
 
         val factory = HttpComponentsClientHttpRequestFactory(httpClient)
-        factory.setConnectTimeout(Duration.ofSeconds(3).toMillis().toInt())
-        factory.setReadTimeout(Duration.ofSeconds(10).toMillis().toInt())
+        factory.setConnectTimeout(Duration.ofSeconds(connectTimeout.toLong()).toMillis().toInt())
+        factory.setReadTimeout(Duration.ofSeconds(readTimeout.toLong()).toMillis().toInt())
         return RestTemplateBuilder()
             .requestFactory { factory }
             .build()

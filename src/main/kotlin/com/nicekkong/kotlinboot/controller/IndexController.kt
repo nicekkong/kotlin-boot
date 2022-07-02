@@ -135,12 +135,15 @@ class IndexController (
             message = "Success",
             body = null,
         )
-
-
         return ResponseEntity(result, HttpStatus.OK)
-
-
     }
+
+    @PostMapping(value = ["/save/emp"])
+    fun saveEmp(@RequestBody empReq:EmployeeRequest): ResponseEntity<CommonResponse<Unit>> {
+        employeeService.saveEmpInfo(empReq)
+        return ResponseEntity(CommonResponse(), HttpStatus.OK)
+    }
+
 
 }
 

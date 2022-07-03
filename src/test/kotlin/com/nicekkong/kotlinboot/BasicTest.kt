@@ -2,13 +2,10 @@ package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.component.MyComponent
 import com.nicekkong.kotlinboot.config.MyConfiguration
+import com.nicekkong.kotlinboot.repository.EmployeeQueryDslRepository
 import com.nicekkong.kotlinboot.service.EmployeeService
-import com.nicekkong.kotlinboot.service.SampleService
-import io.kotest.core.extensions.Extension
-import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldHaveLength
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,7 +13,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.annotation.Rollback
-import kotlin.collections.List
 
 
 //class MyTests : FunSpec({
@@ -61,6 +57,7 @@ class SpringAutowiredConstructorTest @Autowired constructor(
     val myInfo: String,
     val myConfiguration: MyConfiguration,
     val myCInfo: String,
+    val employeeQueryDslRepository: EmployeeQueryDslRepository
 ) : StringSpec({
     "should return the greeting provided by greeting service" {
         employeeService.countMapping() shouldBe 2
@@ -72,6 +69,11 @@ class SpringAutowiredConstructorTest @Autowired constructor(
         println(myCInfo)
 
         println("myConfiguration.myCInfo('컨피규레이션') ===> ${myConfiguration.myCInfo("컨피규레이션")}")
+
+        for (employee in employeeQueryDslRepository.getEmp()) {
+            println("${employee.name} ::: ${employee.job}")
+        }
+
     }
 })
 //

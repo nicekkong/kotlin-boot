@@ -2,7 +2,7 @@ package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.entity.Employee
 import com.nicekkong.kotlinboot.repository.EmployeeRepository
-import io.kotest.matchers.shouldBe
+import com.nicekkong.kotlinboot.repository.querydsl.EmployeeSupportImpl
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDate
@@ -159,6 +159,17 @@ class TestKCode {
 
         a.takeIf { a in ranges }?.let {
             println("a ===> ${it}")
+        }
+    }
+
+    @Autowired
+    lateinit var employeeSupportImpl: EmployeeSupportImpl
+
+    @Test
+    fun `test queryDsl`() {
+
+        for (employee in employeeSupportImpl.getEmp()) {
+            println("${employee.name} ::: ${employee.job}")
         }
     }
 

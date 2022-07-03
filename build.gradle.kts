@@ -42,6 +42,8 @@ repositories {
 }
 
 
+val querydslVersion = "5.0.0"
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -49,6 +51,13 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    //Querydsl
+    implementation("com.querydsl:querydsl-jpa:$querydslVersion")
+    implementation("com.querydsl:querydsl-core:${querydslVersion}")
+    kapt("com.querydsl:querydsl-apt:$querydslVersion:jpa")
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
+
 
     // MyBatis
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
@@ -89,8 +98,6 @@ dependencies {
     testImplementation("io.mockk:mockk:1.12.4")
     testImplementation("com.ninja-squad:springmockk:3.1.1")
 
-
-
     kaptTest("org.mapstruct:mapstruct-processor:1.5.2.Final")
 }
 
@@ -101,6 +108,12 @@ kapt {
         // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
          arg("mapstruct.defaultComponentModel", "spring")
     }
+}
+
+// querydsl target path
+// @Entity에 대하여 QDomain을 만드려면, "Gradle >> Tasks >> other >> compileKotlin을 실행시킨다.
+sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
+    kotlin.srcDir("$buildDir/generated/source/kapt/main")
 }
 
 

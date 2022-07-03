@@ -5,16 +5,12 @@ import com.nicekkong.kotlinboot.entity.Project
 import com.nicekkong.kotlinboot.mybatis.mapper.ProjectMapper
 import com.nicekkong.kotlinboot.repository.MappingRepository
 import com.nicekkong.kotlinboot.repository.ProjectRepository
-import org.assertj.core.api.Assert
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Replace
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.test.annotation.Rollback
-import org.springframework.transaction.annotation.Transactional
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // TestUnit의 기본 DB인 H2가 아닌 어플리케이션의 DB 접속 정보를 활용한다.

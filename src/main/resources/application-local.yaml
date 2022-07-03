@@ -42,6 +42,3 @@ restTemplate:
     perRoute: 2
   connectTimeout: 3
   readTimeout: 3
-
-
-

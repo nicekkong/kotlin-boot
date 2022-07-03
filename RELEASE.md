@@ -1,6 +1,7 @@
 # TODO
 
 ### Add-on
+- QueryDSL with Kotlin
 - LocalCache 설정
     - ehCache 설정
 - [완료]~~Exception에 따른 공통 처리~~

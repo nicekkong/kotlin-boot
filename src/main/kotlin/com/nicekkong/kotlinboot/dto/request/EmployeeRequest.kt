@@ -7,5 +7,4 @@ data class EmployeeRequest (
     val name:String,
     val job:String,
     val deptName:String,
-) {
-}
+)

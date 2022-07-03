@@ -1,6 +1,7 @@
 package com.nicekkong.kotlinboot.controller
 
 import com.nicekkong.kotlinboot.dto.request.EmployeeRequest
+import com.nicekkong.kotlinboot.dto.response.ApiResponse
 import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
 import com.nicekkong.kotlinboot.dto.response.EmployeeResponse
@@ -142,6 +143,13 @@ class IndexController (
     fun saveEmp(@RequestBody empReq:EmployeeRequest): ResponseEntity<CommonResponse<Unit>> {
         employeeService.saveEmpInfo(empReq)
         return ResponseEntity(CommonResponse(), HttpStatus.OK)
+    }
+
+    @GetMapping(value = ["/find/emp/id"])
+    fun findId(@RequestParam(value = "id")id:String
+                            ): ResponseEntity<ApiResponse<EmployeeDto>> {
+        val employeeDto = employeeService.searchById(id.toLong())
+        return ResponseEntity.ok(ApiResponse.success(employeeDto))
     }
 
 

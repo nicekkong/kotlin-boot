@@ -14,12 +14,12 @@ import org.springframework.web.context.request.WebRequest
 import java.time.LocalDateTime
 
 
-@RestControllerAdvice(value = ["com.nicekkong.kotlinboot"])
+//@RestControllerAdvice(value = ["com.nicekkong.kotlinboot"])
 class GlobalExceptionHandler {
 
     private val logger = KotlinLogging.logger {  }
 
-    @ExceptionHandler(value = [Exception::class, ])
+//    @ExceptionHandler(value = [Exception::class, ])
     fun globalExceptionHandler(ex: Exception, request: WebRequest?,):
             ResponseEntity<CustomErrorResponse> {
         logger.error{"[RestControllerAdvice]Error~!! ${ex.stackTraceToString()}"}

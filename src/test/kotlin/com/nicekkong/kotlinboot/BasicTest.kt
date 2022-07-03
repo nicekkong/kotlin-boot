@@ -2,7 +2,7 @@ package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.component.MyComponent
 import com.nicekkong.kotlinboot.config.MyConfiguration
-import com.nicekkong.kotlinboot.repository.EmployeeQueryDslRepository
+import com.nicekkong.kotlinboot.repository.querydsl.QEmployeeRepository
 import com.nicekkong.kotlinboot.service.EmployeeService
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.core.spec.style.StringSpec
@@ -57,7 +57,7 @@ class SpringAutowiredConstructorTest @Autowired constructor(
     val myInfo: String,
     val myConfiguration: MyConfiguration,
     val myCInfo: String,
-    val employeeQueryDslRepository: EmployeeQueryDslRepository
+    val qEmployeeRepository: QEmployeeRepository,
 ) : StringSpec({
     "should return the greeting provided by greeting service" {
         employeeService.countMapping() shouldBe 2
@@ -70,9 +70,12 @@ class SpringAutowiredConstructorTest @Autowired constructor(
 
         println("myConfiguration.myCInfo('컨피규레이션') ===> ${myConfiguration.myCInfo("컨피규레이션")}")
 
-        for (employee in employeeQueryDslRepository.getEmp()) {
+        println("========================================================")
+
+        qEmployeeRepository.findAll().forEach { employee ->
             println("${employee.name} ::: ${employee.job}")
         }
+
 
     }
 })

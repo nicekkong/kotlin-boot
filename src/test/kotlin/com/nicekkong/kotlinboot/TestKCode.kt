@@ -2,7 +2,6 @@ package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.entity.Employee
 import com.nicekkong.kotlinboot.repository.EmployeeRepository
-import com.nicekkong.kotlinboot.repository.querydsl.EmployeeSupportImpl
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDate

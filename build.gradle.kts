@@ -53,10 +53,19 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     //Querydsl
-    implementation("com.querydsl:querydsl-jpa:$querydslVersion")
+    implementation("com.querydsl:querydsl-jpa:${querydslVersion}")
     implementation("com.querydsl:querydsl-core:${querydslVersion}")
     kapt("com.querydsl:querydsl-apt:$querydslVersion:jpa")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
+    sourceSets.main {
+        withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
+            kotlin.srcDir("$buildDir/generated/source/kapt/main")
+        }
+    }
+
+//    implementation("com.querydsl:querydsl-jpa")
+//    kapt(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
+
 
 
     // MyBatis
@@ -112,9 +121,9 @@ kapt {
 
 // querydsl target path
 // @Entity에 대하여 QDomain을 만드려면, "Gradle >> Tasks >> other >> compileKotlin을 실행시킨다.
-sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
-    kotlin.srcDir("$buildDir/generated/source/kapt/main")
-}
+//sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
+//    kotlin.srcDir("$buildDir/generated/source/kapt/main")
+//}
 
 
 tasks.withType<KotlinCompile> {

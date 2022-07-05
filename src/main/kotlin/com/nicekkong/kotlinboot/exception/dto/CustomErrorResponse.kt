@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 
 // TODO: 분석 및 사용 여부 판단 필요
 class CustomErrorResponse {
-    var code:Int? = null
+    var code:String? = null
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     var timestamp: LocalDateTime? = null
 //    var status:Int? = null

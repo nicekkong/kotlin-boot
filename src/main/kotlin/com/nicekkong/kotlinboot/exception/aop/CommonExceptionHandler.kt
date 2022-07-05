@@ -22,16 +22,14 @@ import java.util.*
 
 
 // https://github.com/bokyung-kang/jpashop-kotlin/blob/3908d5d51ce0bfe98403fea2362f116aae19139e/api/src/main/kotlin/com/study/jpashop/api/exception/ExceptionHandler.kt
-@RestControllerAdvice
+//@RestControllerAdvice
 class CommonExceptionHandler(
     private val messageSource: MessageSource,
 ) : ResponseEntityExceptionHandler() {
-    override fun handleHttpMessageNotReadable(
-        ex: HttpMessageNotReadableException,
-        headers: HttpHeaders,
-        status: HttpStatus,
-        request: WebRequest,
-    ): ResponseEntity<Any> {
+    override fun handleHttpMessageNotReadable( ex: HttpMessageNotReadableException,
+                                               headers: HttpHeaders,
+                                               status: HttpStatus,
+                                               request: WebRequest, ): ResponseEntity<Any> {
         logger.error("message", ex)
         val message = when (val exception = ex.cause) {
 

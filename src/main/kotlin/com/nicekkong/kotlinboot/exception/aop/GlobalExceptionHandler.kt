@@ -14,17 +14,17 @@ import org.springframework.web.context.request.WebRequest
 import java.time.LocalDateTime
 
 
-//@RestControllerAdvice(value = ["com.nicekkong.kotlinboot"])
+@RestControllerAdvice(value = ["com.nicekkong.kotlinboot"])
 class GlobalExceptionHandler {
 
     private val logger = KotlinLogging.logger {  }
 
-//    @ExceptionHandler(value = [Exception::class, ])
+    @ExceptionHandler(value = [Exception::class, ])
     fun globalExceptionHandler(ex: Exception, request: WebRequest?,):
             ResponseEntity<CustomErrorResponse> {
         logger.error{"[RestControllerAdvice]Error~!! ${ex.stackTraceToString()}"}
 
-        val exceptionInfo = CustomException(50001, ex.message, ex)
+        val exceptionInfo = CustomException("50000", ex.message, ex)
 //        val exceptionInfo = UserMessageException(ex.message, ex)
 
         val errors = CustomErrorResponse().apply {
@@ -35,5 +35,23 @@ class GlobalExceptionHandler {
         }
 
          return ResponseEntity<CustomErrorResponse>(errors, HttpStatus.OK)
+    }
+
+    @ExceptionHandler(value = [UserMessageException::class, ])
+    fun userMessageExceptionHandler(ex: UserMessageException, request: WebRequest?,):
+            ResponseEntity<CustomErrorResponse> {
+        logger.error{"[RestControllerAdvice]Error~!! ${ex.stackTraceToString()}"}
+
+        val exceptionInfo = CustomException(ex.code?:"50000", ex.message, ex)
+//        val exceptionInfo = UserMessageException(ex.message, ex)
+
+        val errors = CustomErrorResponse().apply {
+            code = exceptionInfo.code
+            timestamp = LocalDateTime.now()
+            errorMessage = exceptionInfo.message
+            stackTrace = exceptionInfo.ex.stackTraceToString()
+        }
+
+        return ResponseEntity<CustomErrorResponse>(errors, HttpStatus.OK)
     }
 }

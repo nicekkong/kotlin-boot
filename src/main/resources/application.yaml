@@ -23,7 +23,12 @@ spring:
       max-lifetime: 50000   # connection 최대 유지 시간
       validation-timeout: 5000
 
-
+  # NoHandlerFoundException 처리
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
 
 
 logging:

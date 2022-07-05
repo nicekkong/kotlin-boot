@@ -31,7 +31,10 @@ enum class ErrorCode(
 
     companion object {
         fun of(code: String): ErrorCode? {
-            return values().firstOrNull { it.name == code }
+            return values().firstOrNull {
+                it.name == code
+            }
+
         }
     }
 }

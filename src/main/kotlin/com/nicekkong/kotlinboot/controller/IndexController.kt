@@ -52,7 +52,7 @@ class IndexController (
         sampleService.myBatis()
 
 //        try {
-            throw UserMessageException("runtimeException")
+//            throw UserMessageException("runtimeException")
 //        } catch(e:Exception) {
 //
 //            logger.info("catch~!!!!!")
@@ -149,9 +149,9 @@ class IndexController (
     fun findId(@RequestParam(value = "id")id:String
                             ): ResponseEntity<ApiResponse<EmployeeDto>> {
         val employeeDto = employeeService.searchById(id.toLong())
+
+        throw UserMessageException("50010","UserMessageException~!!! ")
         return ResponseEntity.ok(ApiResponse.success(employeeDto))
     }
-
-
 }
 

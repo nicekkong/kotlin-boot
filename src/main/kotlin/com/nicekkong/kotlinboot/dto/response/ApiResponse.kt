@@ -5,8 +5,8 @@ import com.nicekkong.kotlinboot.exception.enumType.ApiErrorCode
 import com.nicekkong.kotlinboot.exception.enumType.ErrorCode
 
 data class ApiResponse<T>(
-    val code: String = "0000",
-    val message: String? = "Success",
+    val code: String = ApiResponseCode.SUCCESS.code,
+    val message: String? = ApiResponseCode.FAIL.message,
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     val body: T? = null,
 ) {
@@ -21,5 +21,18 @@ data class ApiResponse<T>(
             ApiResponse(code = code.name, message = message)
 
         fun <T> success(body: T?): ApiResponse<T> = ApiResponse(body = body)
+
+        fun success() = ApiResponse(body = null)
+
+        fun fail() = ApiResponse(code = ApiResponseCode.FAIL.code,
+            message = ApiResponseCode.FAIL.message, body = null)
     }
+}
+
+enum class ApiResponseCode(
+    val code:String, val message:String,
+) {
+
+    SUCCESS("0000", "Success"),
+    FAIL("9999", "Fail"),
 }

@@ -3,7 +3,6 @@ package com.nicekkong.kotlinboot.exception.aop
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
 import com.nicekkong.kotlinboot.dto.response.ApiResponse
-import com.nicekkong.kotlinboot.exception.BadRequestException
 import com.nicekkong.kotlinboot.exception.enumType.ApiErrorCode
 import com.nicekkong.kotlinboot.exception.enumType.ErrorCode
 import com.querydsl.core.util.ArrayUtils
@@ -14,7 +13,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
-import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
@@ -88,7 +86,7 @@ class CommonExceptionHandler(
     /**
      * 에러코드가 있으면 에러에 해당하는 메세지를 세팅
      */
-    @ExceptionHandler(IllegalArgumentException::class, IllegalStateException::class, BadRequestException::class)
+    @ExceptionHandler(IllegalArgumentException::class, IllegalStateException::class,)
     fun handleBadRequestException(exception: RuntimeException): ResponseEntity<ApiResponse<Unit>> {
         logger.error("message", exception)
 

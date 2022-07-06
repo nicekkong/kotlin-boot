@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.servlet.NoHandlerFoundException
 
-//@RestControllerAdvice
+@RestControllerAdvice
 @Order(1)
 class NoHandlerFoundExceptionHandler() {
     @ExceptionHandler(NoHandlerFoundException::class)

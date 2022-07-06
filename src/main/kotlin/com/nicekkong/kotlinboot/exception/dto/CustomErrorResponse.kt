@@ -12,4 +12,14 @@ class CustomErrorResponse {
 //    var status:Int? = null
     var errorMessage: String? = null
     var stackTrace:String? = null
+
+
+    override fun toString():String {
+        return "[ErrorMessage]" +
+                "\ncode: $code" +
+                "\ncode: $code" +
+                "\rtimestamp: $timestamp" +
+                "\nerrorMessage: $errorMessage" +
+                "\nstackTrace: $stackTrace"
+    }
 }

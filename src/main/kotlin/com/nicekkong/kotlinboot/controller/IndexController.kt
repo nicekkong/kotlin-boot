@@ -5,6 +5,8 @@ import com.nicekkong.kotlinboot.dto.response.ApiResponse
 import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
 import com.nicekkong.kotlinboot.dto.response.EmployeeResponse
+import com.nicekkong.kotlinboot.exception.MyErrorCode
+import com.nicekkong.kotlinboot.exception.MyException
 import com.nicekkong.kotlinboot.exception.UserMessageException
 import com.nicekkong.kotlinboot.service.EmployeeService
 import com.nicekkong.kotlinboot.service.SampleService
@@ -145,12 +147,29 @@ class IndexController (
         return ResponseEntity(CommonResponse(), HttpStatus.OK)
     }
 
-    @GetMapping(value = ["/find/emp/id"])
-    fun findId(@RequestParam(value = "id")id:String
+    @GetMapping(value = ["/find/emp/id1"])
+    fun findId1(@RequestParam(value = "id")id:String
                             ): ResponseEntity<ApiResponse<EmployeeDto>> {
         val employeeDto = employeeService.searchById(id.toLong())
 
-        throw UserMessageException("50010","UserMessageException~!!! ")
+        throw Exception("Exception~!!! ")
+        return ResponseEntity.ok(ApiResponse.success(employeeDto))
+    }
+
+    @GetMapping(value = ["/find/emp/id2"])
+    fun findId2(@RequestParam(value = "id")id:String
+    ): ResponseEntity<ApiResponse<EmployeeDto>> {
+        val employeeDto = employeeService.searchById(id.toLong())
+
+        throw UserMessageException("50002", "UserMessageException~!!! ")
+        return ResponseEntity.ok(ApiResponse.success(employeeDto))
+    }
+
+    @GetMapping(value = ["/find/emp/id3"])
+    fun findId3(@RequestParam(value = "id")id:String
+    ): ResponseEntity<ApiResponse<EmployeeDto>> {
+        val employeeDto = employeeService.searchById(id.toLong())
+        throw MyException(MyErrorCode.MY_ERROR)
         return ResponseEntity.ok(ApiResponse.success(employeeDto))
     }
 }

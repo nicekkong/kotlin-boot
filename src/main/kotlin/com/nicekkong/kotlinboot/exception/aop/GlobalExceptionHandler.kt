@@ -1,10 +1,8 @@
 package com.nicekkong.kotlinboot.exception.aop
 
-import com.nicekkong.kotlinboot.exception.BadRequestException
 import com.nicekkong.kotlinboot.exception.UserMessageException
 import com.nicekkong.kotlinboot.exception.dto.CustomErrorResponse
 import com.nicekkong.kotlinboot.exception.dto.CustomException
-import jdk.jshell.spi.ExecutionControl
 import mu.KotlinLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,7 +20,6 @@ class GlobalExceptionHandler {
     @ExceptionHandler(value = [Exception::class, ])
     fun globalExceptionHandler(ex: Exception, request: WebRequest?,):
             ResponseEntity<CustomErrorResponse> {
-        logger.error{"[RestControllerAdvice]Error~!! ${ex.stackTraceToString()}"}
 
         val exceptionInfo = CustomException("50000", ex.message, ex)
 //        val exceptionInfo = UserMessageException(ex.message, ex)
@@ -33,14 +30,14 @@ class GlobalExceptionHandler {
             errorMessage = exceptionInfo.message
             stackTrace = exceptionInfo.ex.stackTraceToString()
         }
+        logger.error{"[RestControllerAdvice]Error~!! ==> $errors"}
 
          return ResponseEntity<CustomErrorResponse>(errors, HttpStatus.OK)
     }
 
     @ExceptionHandler(value = [UserMessageException::class, ])
     fun userMessageExceptionHandler(ex: UserMessageException, request: WebRequest?,):
-            ResponseEntity<CustomErrorResponse> {
-        logger.error{"[RestControllerAdvice]Error~!! ${ex.stackTraceToString()}"}
+            CustomErrorResponse {
 
         val exceptionInfo = CustomException(ex.code?:"50000", ex.message, ex)
 //        val exceptionInfo = UserMessageException(ex.message, ex)
@@ -51,7 +48,8 @@ class GlobalExceptionHandler {
             errorMessage = exceptionInfo.message
             stackTrace = exceptionInfo.ex.stackTraceToString()
         }
+        logger.error{"[RestControllerAdvice]Error~!! ==> $errors"}
 
-        return ResponseEntity<CustomErrorResponse>(errors, HttpStatus.OK)
+        return errors
     }
 }

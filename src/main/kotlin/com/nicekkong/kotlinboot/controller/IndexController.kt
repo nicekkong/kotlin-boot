@@ -12,6 +12,7 @@ import com.nicekkong.kotlinboot.service.EmployeeService
 import com.nicekkong.kotlinboot.service.SampleService
 import lombok.extern.slf4j.Slf4j
 import mu.KotlinLogging
+import org.apache.ibatis.ognl.OgnlRuntime.NotFound
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -171,6 +172,16 @@ class IndexController (
         val employeeDto = employeeService.searchById(id.toLong())
         throw MyException(MyErrorCode.MY_ERROR)
         return ResponseEntity.ok(ApiResponse.success(employeeDto))
+    }
+
+    @GetMapping(value = ["/success"])
+    fun success(): ResponseEntity<ApiResponse<Nothing>> {
+        return ResponseEntity(ApiResponse.success(), HttpStatus.OK)
+    }
+
+    @GetMapping(value = ["/fail"])
+    fun fail(): ResponseEntity<ApiResponse<Nothing>> {
+        return ResponseEntity(ApiResponse.fail(), HttpStatus.NOT_FOUND)
     }
 }
 

@@ -6,7 +6,7 @@ import com.nicekkong.kotlinboot.exception.enumType.ErrorCode
 
 data class ApiResponse<T>(
     val code: String = ApiResponseCode.SUCCESS.code,
-    val message: String? = ApiResponseCode.FAIL.message,
+    val message: String? = ApiResponseCode.SUCCESS.message,
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     val body: T? = null,
 ) {

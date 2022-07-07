@@ -21,7 +21,7 @@ class GlobalExceptionHandler {
     fun globalExceptionHandler(ex: Exception, request: WebRequest?,):
             ResponseEntity<CustomErrorResponse> {
 
-        val exceptionInfo = CustomException("50000", ex.message, ex)
+        val exceptionInfo = CustomException(code = "50000", message = ex.message, ex = ex)
 //        val exceptionInfo = UserMessageException(ex.message, ex)
 
         val errors = CustomErrorResponse().apply {
@@ -39,13 +39,15 @@ class GlobalExceptionHandler {
     fun userMessageExceptionHandler(ex: UserMessageException, request: WebRequest?,):
             CustomErrorResponse {
 
-        val exceptionInfo = CustomException(ex.code?:"50000", ex.message, ex)
+        val exceptionInfo = CustomException(code = ex.code?:"50000", message = ex.message,
+            detailErrorMessage = ex.detailErrorMessage, ex = ex)
 //        val exceptionInfo = UserMessageException(ex.message, ex)
 
         val errors = CustomErrorResponse().apply {
             code = exceptionInfo.code
             timestamp = LocalDateTime.now()
             errorMessage = exceptionInfo.message
+            detailErrorMessage = exceptionInfo.detailErrorMessage
             stackTrace = exceptionInfo.ex.stackTraceToString()
         }
         logger.error{"[RestControllerAdvice]Error~!! ==> $errors"}

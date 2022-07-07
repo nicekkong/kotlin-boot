@@ -5,6 +5,7 @@ import com.nicekkong.kotlinboot.dto.response.ApiResponse
 import com.nicekkong.kotlinboot.dto.response.CommonResponse
 import com.nicekkong.kotlinboot.dto.response.EmployeeDto
 import com.nicekkong.kotlinboot.dto.response.EmployeeResponse
+import com.nicekkong.kotlinboot.exception.MyDetailException
 import com.nicekkong.kotlinboot.exception.MyErrorCode
 import com.nicekkong.kotlinboot.exception.MyException
 import com.nicekkong.kotlinboot.exception.UserMessageException
@@ -170,17 +171,21 @@ class IndexController (
     fun findId3(@RequestParam(value = "id")id:String
     ): ResponseEntity<ApiResponse<EmployeeDto>> {
         val employeeDto = employeeService.searchById(id.toLong())
-        throw MyException(MyErrorCode.MY_ERROR)
+//        throw MyException(MyErrorCode.MY_ERROR)
+        throw MyDetailException(MyErrorCode.MY_ERROR, "detail error message")
         return ResponseEntity.ok(ApiResponse.success(employeeDto))
     }
 
     @GetMapping(value = ["/success"])
     fun success(): ResponseEntity<ApiResponse<Nothing>> {
+        throw UserMessageException("9999", "error message")
         return ResponseEntity(ApiResponse.success(), HttpStatus.OK)
     }
 
     @GetMapping(value = ["/fail"])
     fun fail(): ResponseEntity<ApiResponse<Nothing>> {
+        throw UserMessageException("9999", "error message", "detail error message")
+
         return ResponseEntity(ApiResponse.fail(), HttpStatus.NOT_FOUND)
     }
 }

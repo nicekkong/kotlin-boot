@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.ResponseStatus
 @ResponseStatus(HttpStatus.NOT_FOUND)
 open class UserMessageException : RuntimeException {
     var code:String? = null
-    constructor(code: String?, message: String?) : super(message) {this.code = code?:"50000"}
-    constructor(code: String?, message: String?, cause: Throwable?) : super(message, cause) {}
+    var detailErrorMessage:String? = null
+
+    constructor(code: String? = null, message: String? = null, detailErrorMessage:String? = null, cause: Throwable? = null):
+            super(message, cause) {
+                this.code = code?:"50000"
+                this.detailErrorMessage = detailErrorMessage
+            }
 }

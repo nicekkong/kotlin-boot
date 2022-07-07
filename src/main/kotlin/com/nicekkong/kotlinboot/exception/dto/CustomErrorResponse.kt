@@ -1,6 +1,7 @@
 package com.nicekkong.kotlinboot.exception.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonInclude
 import org.springframework.http.HttpStatus
 import java.time.LocalDateTime
 
@@ -11,6 +12,8 @@ class CustomErrorResponse {
     var timestamp: LocalDateTime? = null
 //    var status:Int? = null
     var errorMessage: String? = null
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    var detailErrorMessage: String? = null      // enum class를 통한 정적 message가 아닌 동적 message를 제공할 경우
     var stackTrace:String? = null
 
 
@@ -20,6 +23,7 @@ class CustomErrorResponse {
                 "\ncode: $code" +
                 "\rtimestamp: $timestamp" +
                 "\nerrorMessage: $errorMessage" +
+                "\ndetailErrorMessage: $detailErrorMessage" +
                 "\nstackTrace: $stackTrace"
     }
 }

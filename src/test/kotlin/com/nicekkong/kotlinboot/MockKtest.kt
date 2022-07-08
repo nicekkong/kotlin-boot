@@ -1,8 +1,8 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.dto.response.EmployeeDto
-import com.nicekkong.kotlinboot.dto.response.TeamDto
-import com.nicekkong.kotlinboot.service.MemberService
+import com.nicekkong.kotlinboot.zample.dto.response.EmployeeDto
+import com.nicekkong.kotlinboot.zample.dto.response.TeamDto
+import com.nicekkong.kotlinboot.zample.service.MemberService
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.impl.annotations.MockK

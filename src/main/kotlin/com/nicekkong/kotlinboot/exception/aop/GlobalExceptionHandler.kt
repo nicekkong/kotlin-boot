@@ -1,8 +1,7 @@
 package com.nicekkong.kotlinboot.exception.aop
 
 import com.nicekkong.kotlinboot.exception.UserMessageException
-import com.nicekkong.kotlinboot.exception.dto.CustomErrorResponse
-import com.nicekkong.kotlinboot.exception.dto.CustomException
+import com.nicekkong.kotlinboot.exception.dto.UserExceptionResponse
 import mu.KotlinLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,36 +18,33 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(value = [Exception::class, ])
     fun globalExceptionHandler(ex: Exception, request: WebRequest?,):
-            ResponseEntity<CustomErrorResponse> {
+            ResponseEntity<UserExceptionResponse> {
 
-        val exceptionInfo = CustomException(code = "50000", message = ex.message, ex = ex)
-//        val exceptionInfo = UserMessageException(ex.message, ex)
-
-        val errors = CustomErrorResponse().apply {
-            code = exceptionInfo.code
+        val errors = UserExceptionResponse().apply {
+            code = "50000"
             timestamp = LocalDateTime.now()
-            errorMessage = exceptionInfo.message
-            stackTrace = exceptionInfo.ex.stackTraceToString()
+            errorMessage = ex.message
+            stackTrace = ex.stackTraceToString()
         }
         logger.error{"[RestControllerAdvice]Error~!! ==> $errors"}
 
-         return ResponseEntity<CustomErrorResponse>(errors, HttpStatus.OK)
+         return ResponseEntity<UserExceptionResponse>(errors, HttpStatus.OK)
     }
 
     @ExceptionHandler(value = [UserMessageException::class, ])
     fun userMessageExceptionHandler(ex: UserMessageException, request: WebRequest?,):
-            CustomErrorResponse {
+            UserExceptionResponse {
 
-        val exceptionInfo = CustomException(code = ex.code?:"50000", message = ex.message,
-            detailErrorMessage = ex.detailErrorMessage, ex = ex)
+//        val exceptionInfo = CustomException(code = ex.code?:"50000", message = ex.message,
+//            detailErrorMessage = ex.detailErrorMessage, ex = ex)
 //        val exceptionInfo = UserMessageException(ex.message, ex)
 
-        val errors = CustomErrorResponse().apply {
-            code = exceptionInfo.code
+        val errors = UserExceptionResponse().apply {
+            code = ex.code?:"50000"
             timestamp = LocalDateTime.now()
-            errorMessage = exceptionInfo.message
-            detailErrorMessage = exceptionInfo.detailErrorMessage
-            stackTrace = exceptionInfo.ex.stackTraceToString()
+            errorMessage = ex.message
+            detailErrorMessage = ex.detailErrorMessage
+            stackTrace = ex.stackTraceToString()
         }
         logger.error{"[RestControllerAdvice]Error~!! ==> $errors"}
 

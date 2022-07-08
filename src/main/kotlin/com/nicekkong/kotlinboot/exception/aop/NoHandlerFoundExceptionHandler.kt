@@ -1,6 +1,6 @@
 package com.nicekkong.kotlinboot.exception.aop
 
-import com.nicekkong.kotlinboot.dto.response.ApiResponse
+import com.nicekkong.kotlinboot.zample.dto.response.ApiResponse
 import com.nicekkong.kotlinboot.exception.enumType.ApiErrorCode
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus

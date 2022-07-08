@@ -2,8 +2,8 @@ package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.component.MyComponent
 import com.nicekkong.kotlinboot.config.MyConfiguration
-import com.nicekkong.kotlinboot.repository.querydsl.QEmployeeRepository
-import com.nicekkong.kotlinboot.service.EmployeeService
+import com.nicekkong.kotlinboot.zample.repository.querydsl.QEmployeeRepository
+import com.nicekkong.kotlinboot.zample.service.EmployeeService
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe

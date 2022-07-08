@@ -1,21 +1,13 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.entity.Department
-import com.nicekkong.kotlinboot.entity.Employee
-import com.nicekkong.kotlinboot.mapper.EmployeeMapper
-import com.nicekkong.kotlinboot.repository.jdbcTemplate.EmployeeJdbcRepository
-import com.nicekkong.kotlinboot.repository.querydsl.QEmployeeRepository
-import com.nicekkong.kotlinboot.service.EmployeeService
-import com.nicekkong.kotlinboot.service.SampleService
-import io.kotest.core.extensions.Extension
+import com.nicekkong.kotlinboot.zample.mapstruct.EmployeeMapper
+import com.nicekkong.kotlinboot.zample.repository.jdbcTemplate.EmployeeJdbcRepository
+import com.nicekkong.kotlinboot.zample.repository.querydsl.QEmployeeRepository
 import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import kotlin.collections.List
 
 
 @SpringBootTest

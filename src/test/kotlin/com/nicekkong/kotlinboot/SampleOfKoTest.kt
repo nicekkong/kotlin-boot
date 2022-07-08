@@ -1,7 +1,7 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.repository.MappingRepository
-import com.nicekkong.kotlinboot.service.SampleService
+import com.nicekkong.kotlinboot.zample.repository.MappingRepository
+import com.nicekkong.kotlinboot.zample.service.SampleService
 import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.*

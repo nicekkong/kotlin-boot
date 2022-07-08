@@ -2,7 +2,7 @@ package com.nicekkong.kotlinboot.exception.aop
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
-import com.nicekkong.kotlinboot.dto.response.ApiResponse
+import com.nicekkong.kotlinboot.zample.dto.response.ApiResponse
 import com.nicekkong.kotlinboot.exception.enumType.ApiErrorCode
 import com.nicekkong.kotlinboot.exception.enumType.ErrorCode
 import com.querydsl.core.util.ArrayUtils

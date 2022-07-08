@@ -1,11 +1,8 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.entity.Mapping
-import com.nicekkong.kotlinboot.entity.Project
-import com.nicekkong.kotlinboot.mybatis.mapper.ProjectMapper
-import com.nicekkong.kotlinboot.repository.MappingRepository
-import com.nicekkong.kotlinboot.repository.ProjectRepository
-import com.nicekkong.kotlinboot.repository.querydsl.QEmployeeRepository
+import com.nicekkong.kotlinboot.zample.repository.MappingRepository
+import com.nicekkong.kotlinboot.zample.repository.ProjectRepository
+import com.nicekkong.kotlinboot.zample.repository.querydsl.QEmployeeRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase

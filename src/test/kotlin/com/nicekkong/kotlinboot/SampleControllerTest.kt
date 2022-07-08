@@ -1,10 +1,7 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.controller.IndexController
-import com.nicekkong.kotlinboot.dto.response.EmployeeDto
-import com.nicekkong.kotlinboot.entity.Department
-import com.nicekkong.kotlinboot.entity.Employee
-import com.nicekkong.kotlinboot.service.EmployeeService
+import com.nicekkong.kotlinboot.zample.controller.IndexController
+import com.nicekkong.kotlinboot.zample.service.EmployeeService
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest

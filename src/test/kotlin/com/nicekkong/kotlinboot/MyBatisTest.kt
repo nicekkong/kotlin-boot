@@ -1,6 +1,6 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.mybatis.mapper.ProjectMapper
+import com.nicekkong.kotlinboot.zample.mybatis.mapper.ProjectMapper
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest
@@ -17,7 +17,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 class MyBatisTest {
 
     @Autowired
-    lateinit var projectMapper:ProjectMapper
+    lateinit var projectMapper: ProjectMapper
 
     @Test
     fun `test mybatis`() {

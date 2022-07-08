@@ -1,9 +1,6 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.entity.Employee
-import com.nicekkong.kotlinboot.repository.EmployeeRepository
-import com.nicekkong.kotlinboot.repository.jdbcTemplate.EmployeeJdbcRepository
-import com.nicekkong.kotlinboot.repository.querydsl.QEmployeeRepository
+import com.nicekkong.kotlinboot.zample.repository.EmployeeRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDate

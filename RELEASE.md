@@ -4,6 +4,7 @@
 - LocalCache 설정
     - ehCache 설정
 - [완료]~~QueryDSL with Kotlin~~
+- [완료]~~JdbcTemplate~~
 - [완료]~~Exception에 따른 공통 처리~~
 - [완료] ~~RestTemplate Component~~
 - [완료] ~~Profile 별 환경 분리~~

@@ -1,10 +1,6 @@
 package com.nicekkong.kotlinboot.config
 
-import com.nicekkong.kotlinboot.dto.response.MapResponse
-import com.nicekkong.kotlinboot.entity.Mapping
-import com.nicekkong.kotlinboot.entity.Project
 import org.modelmapper.ModelMapper
-import org.modelmapper.PropertyMap
 import org.modelmapper.config.Configuration.AccessLevel
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

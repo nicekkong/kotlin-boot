@@ -163,26 +163,6 @@ class TestKCode {
         }
     }
 
-    @Autowired
-    lateinit var qEmployeeRepository: QEmployeeRepository
-
-    @Test
-    fun `test queryDsl`() {
-
-        for (employee in qEmployeeRepository.findAll()) {
-            println("${employee.name} ::: ${employee.job}")
-        }
-    }
-
-    @Autowired
-    lateinit var employeeJdbcRepository: EmployeeJdbcRepository
-
-    @Test
-    fun`test jdbcTemplate`() {
-        val emp = employeeJdbcRepository.findEmployeeById(1)
-        println(emp)
-    }
-
 
 //    class MyTests: ShouldSpec(){
 //        init {

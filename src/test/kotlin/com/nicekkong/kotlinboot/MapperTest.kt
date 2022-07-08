@@ -3,6 +3,8 @@ package com.nicekkong.kotlinboot
 import com.nicekkong.kotlinboot.entity.Department
 import com.nicekkong.kotlinboot.entity.Employee
 import com.nicekkong.kotlinboot.mapper.EmployeeMapper
+import com.nicekkong.kotlinboot.repository.jdbcTemplate.EmployeeJdbcRepository
+import com.nicekkong.kotlinboot.repository.querydsl.QEmployeeRepository
 import com.nicekkong.kotlinboot.service.EmployeeService
 import com.nicekkong.kotlinboot.service.SampleService
 import io.kotest.core.extensions.Extension
@@ -10,6 +12,7 @@ import io.kotest.core.spec.style.AnnotationSpec
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import kotlin.collections.List
@@ -17,7 +20,9 @@ import kotlin.collections.List
 
 @SpringBootTest
 class MapperTest @Autowired constructor(
-    val employeeMapper: EmployeeMapper
+    val employeeMapper: EmployeeMapper,
+    val qEmployeeRepository: QEmployeeRepository,
+    val employeeJdbcRepository: EmployeeJdbcRepository,
 ) : AnnotationSpec() {
 
     @Test
@@ -35,6 +40,21 @@ class MapperTest @Autowired constructor(
         empDto.name shouldBe "nice"
         empDto.workJob shouldBe "S/W developer"
         empDto.department shouldBe "개발팀"
+    }
+
+    @Test
+    fun `test queryDsl`() {
+
+        for (employee in qEmployeeRepository.findAll()) {
+            println("${employee.name} ::: ${employee.job}")
+        }
+    }
+
+
+    @Test
+    fun`test jdbcTemplate`() {
+        val emp = employeeJdbcRepository.findEmployeeById(1)
+        println(emp)
     }
 }
 

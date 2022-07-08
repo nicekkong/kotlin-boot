@@ -1,13 +1,7 @@
-package com.nicekkong.kotlinboot.Utils
+package com.nicekkong.kotlinboot.utils
 
-import humanize.Humanize
 import java.net.URLDecoder
 import java.net.URLEncoder
-import java.nio.charset.Charset
-
-import java.time.*
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 
 object StringUtils {

@@ -1,4 +1,4 @@
-package com.nicekkong.kotlinboot.Utils
+package com.nicekkong.kotlinboot.utils
 
 import humanize.Humanize
 

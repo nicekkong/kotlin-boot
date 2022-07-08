@@ -2,6 +2,8 @@ package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.entity.Employee
 import com.nicekkong.kotlinboot.repository.EmployeeRepository
+import com.nicekkong.kotlinboot.repository.jdbcTemplate.EmployeeJdbcRepository
+import com.nicekkong.kotlinboot.repository.querydsl.QEmployeeRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDate
@@ -162,14 +164,23 @@ class TestKCode {
     }
 
     @Autowired
-    lateinit var employeeSupportImpl: EmployeeSupportImpl
+    lateinit var qEmployeeRepository: QEmployeeRepository
 
     @Test
     fun `test queryDsl`() {
 
-        for (employee in employeeSupportImpl.getEmp()) {
+        for (employee in qEmployeeRepository.findAll()) {
             println("${employee.name} ::: ${employee.job}")
         }
+    }
+
+    @Autowired
+    lateinit var employeeJdbcRepository: EmployeeJdbcRepository
+
+    @Test
+    fun`test jdbcTemplate`() {
+        val emp = employeeJdbcRepository.findEmployeeById(1)
+        println(emp)
     }
 
 

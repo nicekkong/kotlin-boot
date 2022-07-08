@@ -5,6 +5,7 @@ import com.nicekkong.kotlinboot.entity.Project
 import com.nicekkong.kotlinboot.mybatis.mapper.ProjectMapper
 import com.nicekkong.kotlinboot.repository.MappingRepository
 import com.nicekkong.kotlinboot.repository.ProjectRepository
+import com.nicekkong.kotlinboot.repository.querydsl.QEmployeeRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -23,8 +24,11 @@ class JpaRepositoryTest{
     @Autowired
     private lateinit var mappingRepository: MappingRepository
 
+//    @Autowired
+//    lateinit var projectMapper:ProjectMapper
+    
     @Autowired
-    lateinit var projectMapper:ProjectMapper
+    lateinit var qEmployeeRepository:QEmployeeRepository
 
 
 
@@ -60,5 +64,13 @@ class JpaRepositoryTest{
 
 
         println("senderId : $senderId")
+    }
+    
+    
+    @Test
+    fun `test querydsl`() {
+
+
+        qEmployeeRepository.findAll().forEach { it -> print("${it.name}")}
     }
 }

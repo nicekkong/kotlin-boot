@@ -1,6 +1,6 @@
 package com.nicekkong.kotlinboot.zample.entity
 
-import com.nicekkong.kotlinboot.entity.CommonDateEntity
+import com.nicekkong.kotlinboot.entity.common.AuditDateEntity
 import java.util.*
 import javax.persistence.*
 
@@ -17,7 +17,7 @@ class Department (
 
     @OneToMany(mappedBy = "dept")
     var employees: MutableSet<Employee>? = TreeSet()
-        ): CommonDateEntity() {
+        ): AuditDateEntity() {
 
     fun addEmployee(emp: Employee) {
         this.employees?.add(emp)

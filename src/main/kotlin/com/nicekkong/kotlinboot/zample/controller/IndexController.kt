@@ -140,6 +140,15 @@ class IndexController (
         return ResponseEntity(result, HttpStatus.OK)
     }
 
+    @GetMapping(value = ["/update/emp"])
+    fun updateEmp(@RequestParam(value = "id")id:Long,
+                  @RequestParam(value = "name")name:String) {
+
+        employeeService.updateEmp(id, name)
+
+
+    }
+
     @PostMapping(value = ["/save/emp"])
     fun saveEmp(@RequestBody empReq: EmployeeRequest): ResponseEntity<CommonResponse<Unit>> {
         employeeService.saveEmpInfo(empReq)

@@ -13,7 +13,7 @@ import com.nicekkong.kotlinboot.zample.entity.Mapping
 import com.nicekkong.kotlinboot.zample.entity.Student
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
-
+import org.springframework.transaction.annotation.Transactional
 
 
 @Service
@@ -171,6 +171,15 @@ class EmployeeService(
 
 
     fun countMapping():Int = mappingRepository.findAll().size
+
+
+    @Transactional  // for dirty checking
+    fun updateEmp(id: Long, name: String) {
+        employeeRepository.findById(id).get().let{
+            it.name = name
+//            employeeRepository.save(it)
+        }
+    }
 
 
 }

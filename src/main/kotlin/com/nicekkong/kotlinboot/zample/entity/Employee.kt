@@ -1,11 +1,13 @@
 package com.nicekkong.kotlinboot.zample.entity
 
-import com.nicekkong.kotlinboot.entity.CommonDateEntity
+import com.nicekkong.kotlinboot.entity.common.AuditDateEntity
+import org.hibernate.annotations.DynamicUpdate
 import javax.persistence.*
 
 
 @Entity
 @Table(name = "tb_employee")
+@DynamicUpdate  // 변경된 필드만 Update
 class Employee(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +20,7 @@ class Employee(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="dept_id")
     var dept: Department? = null
-) : CommonDateEntity() {
+) : AuditDateEntity() {
     override fun toString() = "Employee : $id $name"
 
     fun addDept(dept: Department) {

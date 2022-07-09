@@ -1,7 +1,7 @@
 package com.nicekkong.kotlinboot.zample.service
 
 import com.nicekkong.kotlinboot.utils.DateUtils
-import com.nicekkong.kotlinboot.zample.mybatis.mapper.ProjectMapper
+import com.nicekkong.kotlinboot.zample.repository.mybatis.mapper.ProjectMapper
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 

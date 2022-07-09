@@ -1,6 +1,6 @@
-package com.nicekkong.kotlinboot.zample.mybatis.mapper
+package com.nicekkong.kotlinboot.zample.repository.mybatis.mapper
 
-import com.nicekkong.kotlinboot.zample.mybatis.model.ProjectModel
+import com.nicekkong.kotlinboot.zample.repository.mybatis.model.ProjectModel
 import com.nicekkong.kotlinboot.zample.entity.Project
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Select

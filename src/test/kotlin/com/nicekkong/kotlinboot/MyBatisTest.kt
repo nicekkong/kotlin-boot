@@ -1,6 +1,6 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.zample.mybatis.mapper.ProjectMapper
+import com.nicekkong.kotlinboot.zample.repository.mybatis.mapper.ProjectMapper
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest

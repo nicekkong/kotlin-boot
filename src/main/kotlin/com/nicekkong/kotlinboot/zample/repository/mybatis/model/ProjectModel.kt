@@ -1,4 +1,4 @@
-package com.nicekkong.kotlinboot.zample.mybatis.model
+package com.nicekkong.kotlinboot.zample.repository.mybatis.model
 
 import com.nicekkong.kotlinboot.annotation.NoArgs
 

@@ -46,7 +46,7 @@ my:
 
 mybatis:
   mapper-locations: mybatis/*.xml
-  type-aliases-package: com.nicekkong.kotlinboot.mybatis.model
+  type-aliases-package: com.nicekkong.kotlinboot.repository.mybatis.model
 
 
 

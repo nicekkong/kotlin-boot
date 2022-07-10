@@ -54,7 +54,7 @@ dependencies {
 
     //Querydsl
     implementation("com.querydsl:querydsl-jpa:${querydslVersion}")
-    implementation("com.querydsl:querydsl-core:${querydslVersion}")
+//    implementation("com.querydsl:querydsl-core:${querydslVersion}")
     kapt("com.querydsl:querydsl-apt:$querydslVersion:jpa")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     sourceSets.main {
@@ -95,6 +95,11 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     // runtimeOnly("com.h2database:h2")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client:2.7.4")
+
+    // Coroutine
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
+//    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm")
 
     annotationProcessor("org.projectlombok:lombok")
 

@@ -1,5 +1,11 @@
 package com.nicekkong.kotlinboot
 
+import com.nicekkong.kotlinboot.zample.entity.Department
+import com.nicekkong.kotlinboot.zample.entity.Employee
+import com.nicekkong.kotlinboot.zample.entity.Mapping
+import com.nicekkong.kotlinboot.zample.entity.Project
+import com.nicekkong.kotlinboot.zample.repository.DepartmentRepository
+import com.nicekkong.kotlinboot.zample.repository.EmployeeRepository
 import com.nicekkong.kotlinboot.zample.repository.MappingRepository
 import com.nicekkong.kotlinboot.zample.repository.ProjectRepository
 import com.nicekkong.kotlinboot.zample.repository.querydsl.QEmployeeRepository
@@ -23,11 +29,6 @@ class JpaRepositoryTest{
 
 //    @Autowired
 //    lateinit var projectMapper:ProjectMapper
-    
-    @Autowired
-    lateinit var qEmployeeRepository:QEmployeeRepository
-
-
 
     @Test
     @Rollback(value = false)
@@ -62,12 +63,29 @@ class JpaRepositoryTest{
 
         println("senderId : $senderId")
     }
-    
-    
+
+
+    @Autowired
+    lateinit var employeeRepository: EmployeeRepository
+
+    @Autowired
+    lateinit var departmentRepository: DepartmentRepository
+
     @Test
-    fun `test querydsl`() {
+    @Rollback(value = false)
+    fun `test join`() {
 
+        val dept = Department().apply {
+            deptName = "IT dev team5"
+        }
 
-        qEmployeeRepository.findAll().forEach { it -> print("${it.name}")}
+        val emp  = Employee().apply{
+            name = "nick5"
+            job = "developer"
+        }
+        dept.addEmployee(emp)
+        val id = departmentRepository.save(dept).id
+
+        println("id ===> $id")
     }
 }

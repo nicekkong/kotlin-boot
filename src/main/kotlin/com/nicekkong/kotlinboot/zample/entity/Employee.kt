@@ -18,7 +18,7 @@ class Employee(
     var job:String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="dept_id")
+    @JoinColumn(name ="dept_id", referencedColumnName = "id")
     var dept: Department? = null
 ) : AuditDateEntity() {
     override fun toString() = "Employee : $id $name"

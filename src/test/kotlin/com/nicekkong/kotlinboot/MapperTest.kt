@@ -1,5 +1,7 @@
 package com.nicekkong.kotlinboot
 
+import com.nicekkong.kotlinboot.zample.entity.Department
+import com.nicekkong.kotlinboot.zample.entity.Employee
 import com.nicekkong.kotlinboot.zample.mapstruct.EmployeeMapper
 import com.nicekkong.kotlinboot.zample.repository.jdbcTemplate.EmployeeJdbcRepository
 import com.nicekkong.kotlinboot.zample.repository.querydsl.QEmployeeRepository

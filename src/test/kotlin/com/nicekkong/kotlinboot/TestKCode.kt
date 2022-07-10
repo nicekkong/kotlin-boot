@@ -1,5 +1,6 @@
 package com.nicekkong.kotlinboot
 
+import com.nicekkong.kotlinboot.zample.entity.Employee
 import com.nicekkong.kotlinboot.zample.repository.EmployeeRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

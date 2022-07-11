@@ -97,9 +97,15 @@ dependencies {
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client:2.7.4")
 
     // Coroutine
-//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
-//    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm")
+
+    // webflux
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
 
     annotationProcessor("org.projectlombok:lombok")
 
@@ -111,6 +117,8 @@ dependencies {
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.2.2")
     testImplementation("io.mockk:mockk:1.12.4")
     testImplementation("com.ninja-squad:springmockk:3.1.1")
+    testImplementation("io.projectreactor:reactor-test")
+
 
     kaptTest("org.mapstruct:mapstruct-processor:1.5.2.Final")
 }
@@ -145,4 +153,3 @@ tasks.withType<Test> {
 // Spring 2.6.8 이하에서 KoTest 사용시, kotlin-coroutines 버전이 1.5.2를 지정되어 오류 발생
 //https://velog.io/@dokkabei97/Kotest-ClassNotFoundException
 extra["kotlin-coroutines.version"] = "1.6.1"
-

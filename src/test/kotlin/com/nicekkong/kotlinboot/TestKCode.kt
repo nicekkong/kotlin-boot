@@ -2,8 +2,13 @@ package com.nicekkong.kotlinboot
 
 import com.nicekkong.kotlinboot.zample.entity.Employee
 import com.nicekkong.kotlinboot.zample.repository.EmployeeRepository
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flow
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.servlet.function.ServerResponse.async
 import java.time.LocalDate
 
 class TestKCode {
@@ -178,7 +183,51 @@ class TestKCode {
 //
 //    }
 
+    @Test
+    fun launchSeveralCoroutinesInDifferentScopes() {
+
+        GlobalScope.launch {
+            delay(1000)
+            println("[${Thread.currentThread().name} - World")
+        }
+        println("[${Thread.currentThread().name} => Hello")
+
+        runBlocking {
+            delay(2000)
+        }
+    }
 
 
+    @Test
+    fun `test coroutines`() {
+        println("1 before runBlocking")
+        // runBlocking : 현재 쓰레드를 블록하고, 내부 코루틴이 종료될 때까지 블록한다.
+        // 코루틴 영역의 시작
+        runBlocking{
+            println("2 before launch")
+            // 코루틴 시작
+            launch {
+                println("3 Hello ")
+                delay(200L)
+                println("4 World")
+            }
+            println("5 after lanuch")
+        }
+        println("6 after runBlocking")
 
+        println("================================================================")
+
+        println("1 before runBlocking")
+        runBlocking{
+            println("2 before launch")
+            async {
+                println("3 Hello ")
+                delay(200L)
+                println("4 World")
+                1
+            }.await()
+            println("5 after lanuch")
+        }
+        println("6 after runBlocking")
+    }
 }

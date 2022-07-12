@@ -21,7 +21,7 @@ class TestKCode {
 
         val numArray = "nicekkong 1 2 3".split(" ")
 
-        for((i, v) in numArray.withIndex()) {
+        for ((i, v) in numArray.withIndex()) {
             println("${i} === > $v")
             println("===============")
         }
@@ -56,7 +56,6 @@ class TestKCode {
     }
 
 
-
 //    @Test
 //    fun `repository test`() {
 //
@@ -71,7 +70,7 @@ class TestKCode {
 
     @Test
     fun saveEmp() {
-        val emp = Employee().apply{
+        val emp = Employee().apply {
             this.name = "nicekkong"
         }
         employeeRepository.save(emp)
@@ -81,14 +80,13 @@ class TestKCode {
     fun `test withIndex()`() {
 
         val strings = arrayOf("this", "is", "an", "array", "of", "strings")
-        for((i, v) in strings.withIndex()){
+        for ((i, v) in strings.withIndex()) {
             println("Index $i maps to $v")
         }
 
-        for(i in strings) {
+        for (i in strings) {
             println("$i")
         }
-
 
 
     }
@@ -96,18 +94,18 @@ class TestKCode {
     @Test
     fun `test collection map`() {
         val keys = 'a'..'f'
-        for(v in keys) {
+        for (v in keys) {
             println(v)
         }
         val map = keys.associateWith {
-                    it.toString().repeat(5)
-                    .replaceFirstChar {c -> c.uppercase() }
+            it.toString().repeat(5)
+                .replaceFirstChar { c -> c.uppercase() }
         }
         println(map)
     }
 
 
-    data class Product(val name:String, var price:Double, var onSale:Boolean = false)
+    data class Product(val name: String, var price: Double, var onSale: Boolean = false)
 
     @Test
     fun `test product`() {
@@ -118,9 +116,10 @@ class TestKCode {
         val products = listOf(p1, p2, p3)
 
         val joinToString = products.filter { it.onSale }
-                                    .joinToString(separator = "|") { it.name }
+            .joinToString(separator = "|") { it.name }
 
-        println(products.filter{it.onSale}.ifEmpty { listOf("A","B") }.joinToString(separator = ","){it.toString()})
+        println(products.filter { it.onSale }.ifEmpty { listOf("A", "B") }
+            .joinToString(separator = ",") { it.toString() })
         println(joinToString)
 
 
@@ -203,7 +202,7 @@ class TestKCode {
         println("1 before runBlocking")
         // runBlocking : 현재 쓰레드를 블록하고, 내부 코루틴이 종료될 때까지 블록한다.
         // 코루틴 영역의 시작
-        runBlocking{
+        runBlocking {
             println("2 before launch")
             // 코루틴 시작
             launch {
@@ -218,7 +217,7 @@ class TestKCode {
         println("================================================================")
 
         println("1 before runBlocking")
-        runBlocking{
+        runBlocking {
             println("2 before launch")
             async {
                 println("3 Hello ")

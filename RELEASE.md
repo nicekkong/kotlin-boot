@@ -3,6 +3,7 @@
 ### Add-on
 - LocalCache 설정
     - ehCache 설정
+- Coroutine 관련 Service
 - [완료]~~QueryDSL with Kotlin~~
 - [완료]~~JdbcTemplate~~
 - [완료]~~Exception에 따른 공통 처리~~

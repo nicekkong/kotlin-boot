@@ -1,5 +1,6 @@
 package com.nicekkong.kotlinboot
 
+
 import org.junit.jupiter.api.Test
 import kotlin.math.pow
 

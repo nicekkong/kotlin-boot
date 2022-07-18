@@ -1,15 +1,8 @@
 package com.nicekkong.kotlinboot
 
-import com.nicekkong.kotlinboot.zample.entity.Employee
-import com.nicekkong.kotlinboot.zample.repository.EmployeeRepository
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flow
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.servlet.function.ServerResponse.async
-import java.time.LocalDate
+import kotlin.system.measureTimeMillis
 
 class CoroutineTest {
 
@@ -243,18 +236,22 @@ class CoroutineTest {
 
             val a1 = async {
 //                complex1()
+                println("5:[${Thread.currentThread().name} ")
                 1
             }
 
             val a2 = async {
 //                complex2()
+                println("6:[${Thread.currentThread().name} ")
                 2
             }
             val awaitAll = awaitAll(a1, a2)
 //            println("c1::: ${awaitAll.component1()}")
 //            println("c2::: ${awaitAll.component2()}")
             complex1()
+            println("4:[${Thread.currentThread().name} ")
         }
+
 //        val aa1 = complex1()
 //        val aa2 = complex2()
 //
@@ -268,14 +265,14 @@ class CoroutineTest {
     }
 
     suspend fun complex1():Int {
-
         val start: Long = System.currentTimeMillis()
         var sum = 0
         repeat(999999999) {
             sum += it
         }
+        println("2:[${Thread.currentThread().name}")
         println("=> c1 takes ${(System.currentTimeMillis() - start) / 1000F}s")
-        complex2()
+
 
         return sum
     }
@@ -288,7 +285,87 @@ class CoroutineTest {
         repeat(899999999) {
             sum += it
         }
+        println("3:[${Thread.currentThread().name}")
         println("c2 takes ${(System.currentTimeMillis() - start) / 1000F}s")
         return sum
     }
+
+
+    @Test
+    fun `suspend test`() {
+
+        val start = System.currentTimeMillis()
+
+        // 해당 코루틴 작업만 일시 중지되고, 쓰레드는 다른 작업 수행이 가능하다.
+        runBlocking {
+//            drawHead()
+//            drawBody()
+            launch {
+                drawHead()
+            }
+            launch {
+                drawBody()
+            }
+        }
+        println("All takes ${(System.currentTimeMillis() - start) / 1000F}s")
+    }
+
+
+    @Test
+    fun `coroutinescope`() {
+        val time = measureTimeMillis {
+            runBlocking {
+                doDraw()
+            }
+        }
+        println("total time::: ${time/1000F}s")
+    }
+
+    suspend fun doDraw() {
+        // 해당 코루틴 작업만 일시 중지되고, 쓰레드는 다른 작업 수행이 가능하다.
+        val time = measureTimeMillis {
+            runBlocking{
+                val one = async {
+                    drawHead()
+                }
+                async{
+                    drawBody()
+                }
+
+//                one.start()
+            }
+
+        }
+//        println("total Time::: ${time/1000F}s")
+    }
+
+
+    suspend fun drawHead() {
+        println("[Init]Draw Head")
+        delay(1)
+        val start = System.currentTimeMillis()
+        var sum = 0
+        repeat(10) {
+            sum += it
+        }
+        println("\t\t\t\t\tdrawHead takes ${(System.currentTimeMillis() - start) / 1000F}s")
+        println("[DONE]Draw Head")
+
+    }
+
+
+     suspend fun drawBody() {
+
+        println("[Init]Draw Body")
+        val start = System.currentTimeMillis()
+        delay(1)
+        var sum = 0
+        repeat(999999999) {
+            sum += it
+        }
+        println("\t\t\t\t\tdrawBody takes ${(System.currentTimeMillis() - start) / 1000F}s")
+        println("[DONE]Draw Body")
+    }
 }
+
+

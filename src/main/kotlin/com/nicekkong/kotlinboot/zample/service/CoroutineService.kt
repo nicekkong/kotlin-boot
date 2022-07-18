@@ -28,6 +28,7 @@ class CoroutineService(
 
         var emp1:EmployeeDto
         var emp2:EmployeeDto
+
         runBlocking {
             val seoul = async {
                 callApi("seoul")

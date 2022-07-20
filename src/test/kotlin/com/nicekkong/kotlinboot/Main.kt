@@ -9,8 +9,15 @@ fun main() = runBlocking {
     val start = System.currentTimeMillis()
     println("111: ${(System.currentTimeMillis() - start)/1000F}s")
     doWorld()
+    co1()
     println("222: ${(System.currentTimeMillis() - start)/1000F}s")
     println("Done")
+}
+
+
+suspend fun co1() {
+    delay(1000)
+    println("adfadsf")
 }
 
 // Concurrently executes both sections

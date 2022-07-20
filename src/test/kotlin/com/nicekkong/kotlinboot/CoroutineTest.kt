@@ -331,8 +331,6 @@ class CoroutineTest {
                 async{
                     drawBody()
                 }
-
-//                one.start()
             }
 
         }

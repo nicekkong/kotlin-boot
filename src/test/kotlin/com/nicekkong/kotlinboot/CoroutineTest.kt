@@ -7,15 +7,37 @@ import kotlin.system.measureTimeMillis
 class CoroutineTest {
 
     @Test
+    fun `simple coroutine`() {
+
+        println("Start~!! ::: ${Thread.currentThread().name}")
+
+        runBlocking {
+            println("runBlocking Start :::\t ${Thread.currentThread().name}")
+            launch {
+                delay(2000)
+                println("inside launch :::\t ${Thread.currentThread().name}")
+            }
+            println("end runBlocking :::\t ${Thread.currentThread().name}")
+        }
+        println("End~!!! :::\t ${Thread.currentThread().name}")
+    }
+
+    @Test
     fun launchSeveralCoroutinesInDifferentScopes() {
         val start:Long = System.currentTimeMillis()
 
         // 현재 스레드를 블록 시키고, runBlocking 안에 코루틴이 완료 될 때까지 기다린다.
         runBlocking {
-//        GlobalScope.launch {
-            delay(1000)
-            println("1: ${(System.currentTimeMillis() - start) / 1000F}s")
-            println("1:[${Thread.currentThread().name} - World")
+            launch {
+                delay(1000)
+                println("1-1: ${(System.currentTimeMillis() - start) / 1000F}s")
+                println("1-1:[${Thread.currentThread().name} - World")
+            }
+            launch {
+                delay(500)
+                println("1-2: ${(System.currentTimeMillis() - start) / 1000F}s")
+                println("1-2:[${Thread.currentThread().name} - World")
+            }
         }
 
         println("2: ${(System.currentTimeMillis() - start) / 1000F}s")

@@ -11,9 +11,11 @@ import com.nicekkong.kotlinboot.zample.entity.Department
 import com.nicekkong.kotlinboot.zample.entity.Employee
 import com.nicekkong.kotlinboot.zample.entity.Mapping
 import com.nicekkong.kotlinboot.zample.entity.Student
+import kotlinx.coroutines.*
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 
 @Service
@@ -180,6 +182,57 @@ class EmployeeService(
 //            employeeRepository.save(it)
         }
     }
+    
+    fun getEmpName():String {
+        val start = System.currentTimeMillis()
+
+        val awaitAll: List<String>
+        runBlocking {
+            val emp5 = async {
+                getEmp5()
+            }
+
+            val emp7 = async {
+                getEmp7()
+            }
+            awaitAll = awaitAll(emp5, emp7)
+        }
+        logger.debug("Total Elapsed Time ::: ${(System.currentTimeMillis() - start)/1000L}s!!!")
+        return "${awaitAll.component1()}:::${awaitAll.component2()}"
+    }
 
 
+    fun getEmpNameSleep(): String {
+        val start = System.currentTimeMillis()
+        val emp5 = getEmp55()
+        val emp7 = getEmp77()
+
+        logger.debug("Total Elapsed Time ::: ${(System.currentTimeMillis() - start)/1000L}s!!!")
+        return "$emp5 ::: $emp7"
+
+    }
+
+
+    suspend fun getEmp5(): String {
+        logger.debug("emp5 Start")
+        delay(3000)
+        return employeeRepository.findById(5L).map{ it.name }.get()
+    }
+    suspend fun getEmp7(): String {
+        logger.debug("emp7 Start")
+        delay(2000)
+        return employeeRepository.findById(7L).map{ it.name }.get()
+    }
+
+
+    fun getEmp55(): String {
+        logger.debug("emp5 Start")
+        Thread.sleep(3000)
+        return employeeRepository.findById(5L).map{ it.name }.get()
+    }
+    fun getEmp77(): String {
+        logger.debug("emp7 Start")
+        Thread.sleep(2000)
+        return employeeRepository.findById(7L).map{ it.name }.get()
+    }
 }

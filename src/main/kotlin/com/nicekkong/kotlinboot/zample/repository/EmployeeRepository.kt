@@ -14,5 +14,6 @@ fun EmployeeRepository.findId(id:Long):Employee = findById(id).orElse(null)
 @Repository
 interface EmployeeRepository : JpaRepository<Employee, Long> {
     fun findByNameContains(name:String): Optional<Employee>
+//    fun findById(id:Long): Long?
 
 }

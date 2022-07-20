@@ -1,5 +1,7 @@
 package com.nicekkong.kotlinboot.zample.controller
 
+import com.nicekkong.kotlinboot.dto.response.ApiResponse
+import com.nicekkong.kotlinboot.zample.service.EmployeeService
 import kotlinx.coroutines.*
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -7,7 +9,7 @@ import java.time.LocalDateTime
 
 @RestController
 class CoroutineController(
-
+    val employeeService: EmployeeService
 ) {
 
     @GetMapping("/foos")
@@ -27,6 +29,24 @@ class CoroutineController(
         return result.toString()
     }
 
+    @GetMapping(value = ["/cosql"])
+    fun getSql(): ApiResponse<Any> {
+        val result = employeeService.getEmpName()
+
+        return ApiResponse (
+            body = mutableMapOf("name" to result)
+        )
+    }
+
+    @GetMapping(value = ["/trsql"])
+    fun getTrSql(): ApiResponse<Any> {
+        val result = employeeService.getEmpNameSleep()
+
+        return ApiResponse (
+            body = mutableMapOf("name" to result)
+        )
+    }
+
 
     suspend fun doWorld() = coroutineScope { // this: CoroutineScope
         var num1 = 0
@@ -41,7 +61,7 @@ class CoroutineController(
             println("World 1")
             num2 = 222
         }
-        println("Hello") 
+        println("Hello")
         print(num1 + num2)
     }
 

@@ -359,14 +359,38 @@ class CoroutineTest {
 //        println("total Time::: ${time/1000F}s")
     }
 
+    @Test
+    fun `test draw`() {
+        println("main:[${Thread.currentThread().name}")
+        val time = measureTimeMillis {
+            runBlocking {
+                println("runBlocking:[${Thread.currentThread().name}")
+                launch {
+                    println("dh-0:[${Thread.currentThread().name}")
+                    drawHead()
+                }
+                launch {
+                    println("db-0:[${Thread.currentThread().name}")
+                    drawBody()
+                }
+            }
+        }
+        println("time ===> ${time/1000F}s")
+    }
+
+
 
     suspend fun drawHead() {
         println("[Init]Draw Head")
-        delay(1)
+        println("dh1:[${Thread.currentThread().name}")
         val start = System.currentTimeMillis()
         var sum = 0
-        repeat(10) {
-            sum += it
+
+        coroutineScope {
+            println("dh2:[${Thread.currentThread().name}")
+            repeat(999999999) {
+                sum += it
+            }
         }
         println("\t\t\t\t\tdrawHead takes ${(System.currentTimeMillis() - start) / 1000F}s")
         println("[DONE]Draw Head")
@@ -374,15 +398,16 @@ class CoroutineTest {
     }
 
 
-     suspend fun drawBody() {
+     fun drawBody() {
 
-        println("[Init]Draw Body")
-        val start = System.currentTimeMillis()
-        delay(1)
-        var sum = 0
-        repeat(999999999) {
-            sum += it
-        }
+         println("[Init]Draw Body")
+         println("db1:[${Thread.currentThread().name}")
+         val start = System.currentTimeMillis()
+         var sum = 0
+             println("db2:[${Thread.currentThread().name}")
+             repeat(999999999) {
+                 sum += it
+             }
         println("\t\t\t\t\tdrawBody takes ${(System.currentTimeMillis() - start) / 1000F}s")
         println("[DONE]Draw Body")
     }

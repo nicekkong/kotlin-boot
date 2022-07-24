@@ -2,6 +2,7 @@ package com.nicekkong.kotlinboot
 
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.Test
+import kotlin.coroutines.coroutineContext
 import kotlin.system.measureTimeMillis
 
 class CoroutineTest {
@@ -410,6 +411,92 @@ class CoroutineTest {
              }
         println("\t\t\t\t\tdrawBody takes ${(System.currentTimeMillis() - start) / 1000F}s")
         println("[DONE]Draw Body")
+    }
+
+
+    @Test
+    fun `suspend function()`() {
+        runBlocking {
+            val time = measureTimeMillis {
+                val one = doSomeThing1()
+                val two = doSomeThing2()
+                println("${one + two}")
+            }
+            println("Completed Time ::: $time ms")
+        }
+    }
+
+
+    @Test
+    fun `suspend function2()`() {
+        runBlocking(Dispatchers.IO) {
+            val time = measureTimeMillis {
+                val one = async {doSomeThing1()}
+//                val one = CoroutineScope(Dispatchers.Default).async {doSomeThing1()}
+//                val one = async(Dispatchers.IO){doSomeThing1()}
+                val two = async {doSomeThing2()}
+//                val two = CoroutineScope(Dispatchers.Default).async {doSomeThing2()}
+//                val two = async(Dispatchers.IO){doSomeThing2()}
+
+                println("${one.await() + two.await()}")
+            }
+
+            withContext(Dispatchers.IO) {
+                println("=== ${Thread.currentThread().name}")
+                println("Completed Time ::: $time ms")
+            }
+
+        }
+    }
+
+    private suspend fun doSomeThing1(): Int {
+        val start = System.currentTimeMillis()
+        var num = 1
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+
+        println("11111  => ${System.currentTimeMillis() - start}ms")
+        println("1111 => ${Thread.currentThread().name}")
+        return 10
+    }
+
+    private suspend fun doSomeThing2(): Int {
+        val start = System.currentTimeMillis()
+        var num = 1
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+        repeat(999999999) {
+            num += num
+        }
+        println("22222  => ${System.currentTimeMillis() - start}ms")
+        println("22222 => ${Thread.currentThread().name}")
+        return 20
     }
 }
 

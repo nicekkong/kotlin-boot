@@ -7,6 +7,7 @@ import kotlinx.coroutines.runBlocking
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForObject
+import org.springframework.web.reactive.function.client.WebClient
 import java.net.URI
 import java.time.LocalDateTime
 
@@ -26,31 +27,57 @@ class CoroutineService(
 
     fun getWeatherByApi():String {
 
-        var emp1:EmployeeDto
-        var emp2:EmployeeDto
-
         runBlocking {
             val seoul = async {
-                callApi("seoul")
+                println("Seoul~!!!")
+                callApi1("seoul")
             }
 
             val busan = async {
-                callApi("busan")
+                println("Busan~!!!")
+                callApi2("busan")
             }
 
 //            val locations = awaitAll(seoul, busan)
 
-            emp1 = seoul.await()
-            emp2 = busan.await()
+            val emp1 = seoul.await()
+            val emp2 = busan.await()
 
 //            emp1:EmployeeDto = locations.component1()
 //            emp2:EmployeeDto = locations.component2()
         }
-        return emp1.name!!
+        return "asdf"
     }
 
-    suspend fun callApi(location:String):EmployeeDto {
-        return restTemplate.getForObject<EmployeeDto>("http://www.naver.com")
+    suspend fun callApi1(location:String):String {
+        println("$location  ::: callApi Call by ${Thread.currentThread().name}")
+//        restTemplate.getForObject<String>("https://www.naver.com")
+        
+        val wc = WebClient.builder()
+            .baseUrl("https://www.naver.com")
+            .build()
+        wc.get()
+            .uri("/index")
+            .retrieve()
+
+
+        println("${location} is done")
+        return location
+    }
+
+    suspend fun callApi2(location:String):String {
+        println("$location ::: callApi Call by ${Thread.currentThread().name}")
+//        restTemplate.getForObject<String>("https://www.naver.com")
+        val wc = WebClient.builder()
+            .baseUrl("https://www.naver.com")
+            .build()
+        wc.get()
+            .uri("/index")
+            .retrieve()
+
+
+        println("${location} is done")
+        return location
     }
 
 

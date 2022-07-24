@@ -1,6 +1,7 @@
 package com.nicekkong.kotlinboot.zample.controller
 
 import com.nicekkong.kotlinboot.dto.response.ApiResponse
+import com.nicekkong.kotlinboot.zample.service.CoroutineService
 import com.nicekkong.kotlinboot.zample.service.EmployeeService
 import kotlinx.coroutines.*
 import org.springframework.web.bind.annotation.GetMapping
@@ -9,7 +10,8 @@ import java.time.LocalDateTime
 
 @RestController
 class CoroutineController(
-    val employeeService: EmployeeService
+    val employeeService: EmployeeService,
+    val coroutineService: CoroutineService,
 ) {
 
     @GetMapping("/foos")
@@ -55,6 +57,17 @@ class CoroutineController(
 
         return ApiResponse (
             body = mutableMapOf("name" to result)
+        )
+    }
+
+
+    @GetMapping(value = ["/api"])
+    fun getApi() : ApiResponse<Any> {
+
+        coroutineService.getWeatherByApi()
+
+        return ApiResponse (
+            body = mutableMapOf("name" to "Seoul")
         )
     }
 

@@ -91,6 +91,9 @@ dependencies {
     // HttpClient
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
 
+    // WebClient
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+
 
     compileOnly("org.projectlombok:lombok")
     // runtimeOnly("com.h2database:h2")

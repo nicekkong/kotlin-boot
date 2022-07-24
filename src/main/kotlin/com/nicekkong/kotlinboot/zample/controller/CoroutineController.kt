@@ -29,7 +29,7 @@ class CoroutineController(
         return result.toString()
     }
 
-    @GetMapping(value = ["/cosql"])
+    @GetMapping(value = ["/cosql1"])
     fun getSql(): ApiResponse<Any> {
         val result = employeeService.getEmpName()
 
@@ -37,6 +37,17 @@ class CoroutineController(
             body = mutableMapOf("name" to result)
         )
     }
+
+    @GetMapping(value = ["/cosql2"])
+    fun getSql2(): ApiResponse<Any> {
+        val result = employeeService.getEmpNameWithoutRunBlocking()
+
+        return ApiResponse (
+            body = mutableMapOf("name" to result)
+        )
+    }
+
+
 
     @GetMapping(value = ["/trsql"])
     fun getTrSql(): ApiResponse<Any> {

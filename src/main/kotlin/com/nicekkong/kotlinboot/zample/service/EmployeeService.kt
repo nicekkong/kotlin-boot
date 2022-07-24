@@ -15,6 +15,7 @@ import kotlinx.coroutines.*
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.servlet.function.ServerResponse.async
 import java.util.*
 
 
@@ -188,17 +189,40 @@ class EmployeeService(
 
         val awaitAll: List<String>
         runBlocking {
-            val emp5 = async {
+            val emp5 = CoroutineScope(Dispatchers.IO).async {
+//            val emp5 = async {
                 getEmp5()
             }
 
+            val emp7 = CoroutineScope(Dispatchers.IO).async {
+//            val emp7 = async {
+                getEmp7()
+            }
+
+
+
+            awaitAll = awaitAll(emp5, emp7)
+        }
+        logger.debug("Total Elapsed Time ::: ${(System.currentTimeMillis() - start)/1000F}s!!!")
+        return "${awaitAll.component1()}:::${awaitAll.component2()}"
+    }
+
+    fun getEmpNameWithoutRunBlocking() :String {
+        val emp5Name = runBlocking{
+            val emp5 = CoroutineScope(Dispatchers.IO).async {
+                getEmp5()
+            }
+            emp5.await()
+        }
+
+        val emp7Name = runBlocking{
             val emp7 = async {
                 getEmp7()
             }
-            awaitAll = awaitAll(emp5, emp7)
+            emp7.await()
         }
-        logger.debug("Total Elapsed Time ::: ${(System.currentTimeMillis() - start)/1000L}s!!!")
-        return "${awaitAll.component1()}:::${awaitAll.component2()}"
+        return "$emp5Name ::: $emp7Name"
+
     }
 
 
@@ -207,31 +231,95 @@ class EmployeeService(
         val emp5 = getEmp55()
         val emp7 = getEmp77()
 
-        logger.debug("Total Elapsed Time ::: ${(System.currentTimeMillis() - start)/1000L}s!!!")
+        logger.debug("Total Elapsed Time ::: ${(System.currentTimeMillis() - start)/1000F}s!!!")
         return "$emp5 ::: $emp7"
 
     }
 
 
     suspend fun getEmp5(): String {
-        logger.debug("emp5 Start")
-        delay(3000)
-        return employeeRepository.findById(5L).map{ it.name }.get()
+        val start = System.currentTimeMillis()
+        logger.debug("emp5 Start ::: ${Thread.currentThread().name}")
+        //        delay(2000)
+        var num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        println("emp5 ==> $num")
+        val get = employeeRepository.findById(5L).map { it.name }.get()
+
+        logger.debug("555555 Total Elapsed Time ::: ${(System.currentTimeMillis() - start)/1000F}s!!!")
+        return get
+
     }
     suspend fun getEmp7(): String {
-        logger.debug("emp7 Start")
-        delay(2000)
-        return employeeRepository.findById(7L).map{ it.name }.get()
+        val start = System.currentTimeMillis()
+        logger.debug("emp7 Start ::: ${Thread.currentThread().name}")
+//        delay(2000)
+        var num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        num = 0
+        repeat(999999999) {
+            num += it
+        }
+        println("emp7 ==> $num")
+        val get = employeeRepository.findById(7L).map { it.name }.get()
+
+        logger.debug("7777 Total Elapsed Time ::: ${(System.currentTimeMillis() - start)/1000F}s!!!")
+        return get
+
     }
 
 
     fun getEmp55(): String {
-        logger.debug("emp5 Start")
+        logger.debug("emp5 Start  ${Thread.currentThread().name}")
         Thread.sleep(3000)
         return employeeRepository.findById(5L).map{ it.name }.get()
     }
     fun getEmp77(): String {
-        logger.debug("emp7 Start")
+        logger.debug("emp7 Start  ${Thread.currentThread().name}")
         Thread.sleep(2000)
         return employeeRepository.findById(7L).map{ it.name }.get()
     }

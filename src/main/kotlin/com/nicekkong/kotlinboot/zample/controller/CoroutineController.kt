@@ -72,6 +72,17 @@ class CoroutineController(
     }
 
 
+    @GetMapping(value = ["/api2"])
+    fun getApi2() : ApiResponse<Any> {
+
+        val names = coroutineService.getNames()
+
+        return ApiResponse (
+            body = mutableMapOf("name" to names)
+        )
+    }
+
+
     suspend fun doWorld() = coroutineScope { // this: CoroutineScope
         var num1 = 0
         launch {

@@ -85,8 +85,6 @@ class CoroutineService(
         return location
     }
 
-
-
     suspend fun getLocation():String = "Seoul"
     suspend fun getWeather():String = "Good"
     suspend fun getDate():LocalDateTime = LocalDateTime.now()

@@ -27,6 +27,11 @@ noArg {
     annotation("org.apache.ibatis.annotations.Mapper")
 }
 
+
+tasks.getByName<Jar>("jar") {
+    enabled = false
+}
+
 group = "com.nicekkong"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -111,7 +116,7 @@ dependencies {
 
     // Spring Actuator
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    
+
     annotationProcessor("org.projectlombok:lombok")
 
     // test module

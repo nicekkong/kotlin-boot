@@ -109,7 +109,9 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
-
+    // Spring Actuator
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    
     annotationProcessor("org.projectlombok:lombok")
 
     // test module

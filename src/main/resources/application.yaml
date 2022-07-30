@@ -59,3 +59,9 @@ restTemplate:
   readTimeout: 3
 
 
+# Spring Actuator End-point
+management:
+  endpoints:
+    web:
+      base-path: /kotlin_boot
+

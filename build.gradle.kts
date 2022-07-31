@@ -27,7 +27,7 @@ noArg {
     annotation("org.apache.ibatis.annotations.Mapper")
 }
 
-
+// SpringBoot 2.5 이상에서 *.plain.jar 추가 생성 방지
 tasks.getByName<Jar>("jar") {
     enabled = false
 }

@@ -37,6 +37,10 @@ class IndexController (
     @Value("\${my.info.email}")
     private lateinit var myEmail:String
 
+    @GetMapping("/")
+    fun index(): String {
+        return "OK"
+    }
 
     @GetMapping("/save/emp")
     fun saveEmp(@RequestParam(value = "name")name:String) = employeeService.saveEmployee(name)

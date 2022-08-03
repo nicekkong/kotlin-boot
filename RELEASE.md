@@ -1,6 +1,7 @@
 # TODO
 
 ### Add-on
+- Dockerfile 연동 개발
 - LocalCache 설정
     - ehCache 설정
 - Coroutine 관련 Service
@@ -21,7 +22,7 @@
   - mapStruct
 
 ### Need to Fix.
-- Exception 처리에 따른 공통 모듈 개발
+- [완료]~~Exception 처리에 따른 공통 모듈 개발~~
 
 ###
 22.07.29 - DB 변경

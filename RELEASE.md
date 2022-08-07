@@ -2,6 +2,7 @@
 
 ### Add-on
 - Dockerfile 연동 개발
+   - Docker 배포 http://nicekkong.com:9000
 - LocalCache 설정
     - ehCache 설정
 - Coroutine 관련 Service

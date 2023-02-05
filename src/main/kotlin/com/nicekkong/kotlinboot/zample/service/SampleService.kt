@@ -2,11 +2,12 @@ package com.nicekkong.kotlinboot.zample.service
 
 import com.nicekkong.kotlinboot.utils.DateUtils
 import com.nicekkong.kotlinboot.zample.repository.mybatis.mapper.ProjectMapper
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 @Service
-class SampleService(
+class SampleService (
     val projectMapper: ProjectMapper
 ) {
 

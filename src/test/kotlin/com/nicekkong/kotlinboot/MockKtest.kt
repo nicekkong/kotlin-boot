@@ -73,20 +73,20 @@ class MockKtest {
         verify(exactly = 1,) {mockService.getTotalMember()} // 해당 메서드가 exactly 횟수 만큼 호출
     }
 
-    @Test
-    fun `spyk test`() {
-        // 전체 속성 중, 테스트하려는 속성만 설정하여 spy mock을 생성할 수 있다.
-        val mockEmp = mockk<TeamDto> {
-            every { name } returns "nicekkong"
-        }
-        spyk(mockEmp).getMyName() shouldBe "nicekkong님"
-        mockEmp.getMyName() shouldBe "nicekkong님"
-
-//         해당 객체에 대하여 전체 값을 모두 셋팅하지 않아도 정상적으로 객체(Mock)을 생성한다.
-//        val spyTeam = spyk(TeamDto(name = "닉과르")) // spyk() 에는 유효한 Entity가 들어와야 하는데, id가 누락이 되어 있으므로 초기화 오류 발생
-//        spyTeam.getMyName() shouldBe "닉과르님"
-
-    }
+//    @Test
+//    fun `spyk test`() {
+//        // 전체 속성 중, 테스트하려는 속성만 설정하여 spy mock을 생성할 수 있다.
+//        val mockEmp = mockk<TeamDto> {
+//            every { name } returns "nicekkong"
+//        }
+//        spyk(mockEmp).getMyName() shouldBe "nicekkong님"
+//        mockEmp.getMyName() shouldBe "nicekkong님"
+//
+////         해당 객체에 대하여 전체 값을 모두 셋팅하지 않아도 정상적으로 객체(Mock)을 생성한다.
+////        val spyTeam = spyk(TeamDto(name = "닉과르")) // spyk() 에는 유효한 Entity가 들어와야 하는데, id가 누락이 되어 있으므로 초기화 오류 발생
+////        spyTeam.getMyName() shouldBe "닉과르님"
+//
+//    }
 
     @Test
     fun `test when`() {

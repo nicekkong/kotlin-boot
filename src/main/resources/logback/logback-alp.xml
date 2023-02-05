@@ -3,7 +3,7 @@
 <!-- https://ckddn9496.tistory.com/79?category=428336 -->
 <configuration>
 
-    <property name="LOG_HOME" value="/Users/nicekkong/Desktop/intellij_repo/logs/kotlin-boot" />
+    <property name="LOG_HOME" value="/app/was/logs" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">

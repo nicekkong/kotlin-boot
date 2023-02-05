@@ -21,9 +21,9 @@ import org.springframework.web.client.RestTemplate
 @Slf4j
 @RestController
 class IndexController (
-    val employeeService: EmployeeService,
-    val restTemplate:RestTemplate,
-    val sampleService: SampleService
+    private val employeeService: EmployeeService,
+    private val restTemplate:RestTemplate,
+    private val sampleService: SampleService
 
     ) {
 
